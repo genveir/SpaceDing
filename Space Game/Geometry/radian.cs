@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Space_Game.Geometry
+{
+    public struct radian
+    {
+        private const double TAU = 2 * Math.PI;
+
+        private readonly double value;
+
+        public radian(double value)
+        {
+            value = value % TAU;
+            if (value < 0) value += TAU;
+
+            this.value = value;
+        }
+
+        public double toDouble()
+        {
+            return value;
+        }
+
+        public static implicit operator radian(double value)
+        {
+            return new radian(value);
+        }
+
+        public static radian operator +(radian first, radian second)
+        {
+            return new radian(first.value + second.value);
+        }
+
+        public static radian operator -(radian first, radian second)
+        {
+            return new radian(first.value - second.value);
+        }
+
+        public static radian operator *(double first, radian second)
+        {
+            return new radian(first * second.value);
+        }
+
+        public static radian operator *(radian first, double second)
+        {
+            return new radian(first.value * second);
+        }
+
+        public static radian operator /(radian first, double second)
+        {
+            return new radian(first.value / second);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("radian: " + value / TAU);
+        }
+    }
+}
