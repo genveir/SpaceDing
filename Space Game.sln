@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Space Game", "Space Game\Sp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Space Game Tests", "Space Game Tests\Space Game Tests.csproj", "{1A14A7BA-4E7D-4D62-B4C6-8D03AFB3349E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carrier", "Carrier\Carrier.csproj", "{B661D10D-BB93-4146-8355-11AB4D86D32C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{2FBA4F25-2452-49AF-8055-FD5FE48D61C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{1A14A7BA-4E7D-4D62-B4C6-8D03AFB3349E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A14A7BA-4E7D-4D62-B4C6-8D03AFB3349E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A14A7BA-4E7D-4D62-B4C6-8D03AFB3349E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B661D10D-BB93-4146-8355-11AB4D86D32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B661D10D-BB93-4146-8355-11AB4D86D32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B661D10D-BB93-4146-8355-11AB4D86D32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B661D10D-BB93-4146-8355-11AB4D86D32C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FBA4F25-2452-49AF-8055-FD5FE48D61C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FBA4F25-2452-49AF-8055-FD5FE48D61C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FBA4F25-2452-49AF-8055-FD5FE48D61C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FBA4F25-2452-49AF-8055-FD5FE48D61C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

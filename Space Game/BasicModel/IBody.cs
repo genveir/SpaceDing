@@ -9,10 +9,8 @@ namespace Space_Game.BasicModel
 {
     public interface IBody
     {
+        string Name { get; set; }
         long Mass { get; set; }
         ILocation Location { get; set; }
-
-        bool Observed { get; set; }
-        void Update();
     }
 }

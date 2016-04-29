@@ -20,6 +20,11 @@ namespace Space_Game.Geometry
             this.value = value;
         }
 
+        public static radian FromDegree(double degree)
+        {
+            return new radian(degree / 180.0d * Math.PI);
+        }
+
         public double toDouble()
         {
             return value;

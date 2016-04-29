@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A2BBFEB4-710F-4136-82D0-E1F20D05AE76}</ProjectGuid>
+    <ProjectGuid>{B661D10D-BB93-4146-8355-11AB4D86D32C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Space_Game</RootNamespace>
-    <AssemblyName>Space Game</AssemblyName>
+    <RootNamespace>Space_Game.Carrier</RootNamespace>
+    <AssemblyName>Carrier</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,16 +22,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,29 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicModel\DefaultBodies\Asteroid.cs" />
-    <Compile Include="BasicModel\DefaultBodies\AsteroidBelt.cs" />
-    <Compile Include="BasicModel\DefaultBodies\Body.cs" />
-    <Compile Include="BasicModel\UpdatableGroup.cs" />
-    <Compile Include="BasicModel\DefaultBodies\Planet.cs" />
-    <Compile Include="BasicModel\DefaultBodies\Star.cs" />
-    <Compile Include="BasicModel\IBody.cs" />
-    <Compile Include="BasicModel\IHasHeading.cs" />
-    <Compile Include="BasicModel\IIsPowered.cs" />
-    <Compile Include="BasicModel\IUpdatable.cs" />
-    <Compile Include="Geometry\DegreeDirection.cs" />
-    <Compile Include="Geometry\Direction.cs" />
-    <Compile Include="Geometry\Distance.cs" />
-    <Compile Include="Geometry\Location\FixedLocation.cs" />
-    <Compile Include="Geometry\Location\ILocation.cs" />
-    <Compile Include="Geometry\Location\OrbitLocation.cs" />
-    <Compile Include="Geometry\radian.cs" />
-    <Compile Include="Geometry\RadianDirection.cs" />
-    <Compile Include="Geometry\vector.cs" />
+    <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Simulation\Model\SolarSystem.cs" />
-    <Compile Include="Simulation\Time.cs" />
-    <Compile Include="Simulation\Model\Universe.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Space Game\Space Game.csproj">
+      <Project>{a2bbfeb4-710f-4136-82d0-e1f20d05ae76}</Project>
+      <Name>Space Game</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

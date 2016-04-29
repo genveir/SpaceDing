@@ -1,4 +1,5 @@
-﻿using Space_Game.Simulation;
+﻿using Space_Game.BasicModel;
+using Space_Game.Simulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,20 @@ namespace Space_Game.Geometry
             startingAngle = Direction.Calculate(center, startingPoint);
             distance = Distance.Calculate(center, startingPoint);
         }
+        public OrbitLocation(IBody anchor, ILocation startingPoint, radian rotationPerTick) :
+            this(anchor.Location, startingPoint, rotationPerTick) { }
+
+        public OrbitLocation(ILocation center, Direction startingDirection, Distance distance, radian rotationPerTick)
+        {
+            this.center = center;
+            this.rotationPerTick = rotationPerTick;
+
+            this.startingAngle = startingDirection;
+            this.distance = distance;
+        }
+
+        public OrbitLocation(IBody anchor, Direction startingDirection, Distance distance, radian rotationPerTick) :
+            this(anchor.Location, startingDirection, distance, rotationPerTick) { }
 
         public long X
         {

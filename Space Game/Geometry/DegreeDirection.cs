@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Space_Game
+namespace Space_Game.Geometry
 {
-    class Program
+    public class DegreeDirection : Direction
     {
-        static void Main(string[] args)
+        public DegreeDirection(double direction)
         {
+            InDegrees = direction;
         }
-
-        
     }
 }

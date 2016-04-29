@@ -7,8 +7,30 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Simulation
 {
-    class Universe
+    class Universe : IUpdatable
     {
         public IEnumerable<SolarSystem> Systems { get; set; }
+
+        public bool Observed
+        {
+            get
+            {
+                return true;
+            }
+
+            set
+            {
+                // the universe should always be observed
+                throw new NotImplementedException();
+            }
+        }
+
+        public void Update()
+        {
+            Parallel.ForEach(Systems, system =>
+            {
+                system.Update();
+            });
+        }
     }
 }

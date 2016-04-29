@@ -21,8 +21,20 @@ namespace Space_Game
             Assert.AreEqual(30, v3.XOffset);
             Assert.AreEqual(15, v3.YOffset);
 
-            Assert.LessOrEqual(Math.Abs((v1.Direction - v2.Direction).InRadians.toDouble()), 0.001d);
-            Assert.LessOrEqual(Math.Abs((v1.Direction - v3.Direction).InRadians.toDouble()), 0.001d);
+            var v1Dir = v1.Direction.InRadians.toDouble();
+            var v2Dir = v2.Direction.InRadians.toDouble();
+            var v3Dir = v3.Direction.InRadians.toDouble();
+
+            Assert.LessOrEqual(Math.Abs(v1Dir - v2Dir), 0.001d);
+            Assert.LessOrEqual(Math.Abs(v1Dir - v3Dir), 0.001d);
+        }
+
+        [Test]
+        public void VectorsHaveTheDirectionTheyreCreatedWith()
+        {
+            vector v1 = new vector(new RadianDirection(new radian(Math.PI)), new Distance(10000));
+
+            Assert.AreEqual(new radian(Math.PI), v1.Direction.InRadians);
         }
     }
 }
