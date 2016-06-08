@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Simulation
 {
-    class SolarSystem : UpdatableGroup<IUpdatable>
+    public class SolarSystem : UpdatableGroup<IUpdatable>
     {
 
     }

@@ -1,6 +1,7 @@
 ﻿using Space_Game.BasicModel;
 using Space_Game.BasicModel.DefaultBodies;
 using Space_Game.Geometry;
+using Space_Game.Simulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,12 @@ namespace Space_Game.Carrier
                 startingDirection: new DegreeDirection(20),
                 startingDistance: new Distance(600 * THOUSAND),
                 rotationPerTick: radian.FromDegree(1));
+
+            var system = new SolarSystem();
+            system.AddMember(Sun);
+
+            var universe = new Universe();
+            universe.Systems = new SolarSystem[] { system };
         }
     }
 }

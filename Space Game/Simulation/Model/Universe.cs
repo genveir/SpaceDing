@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Simulation
 {
-    class Universe : IUpdatable
+    public class Universe : IUpdatable
     {
         public IEnumerable<SolarSystem> Systems { get; set; }
 

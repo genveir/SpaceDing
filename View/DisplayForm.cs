@@ -1,5 +1,4 @@
-﻿using Space_Game.Carrier;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +19,7 @@ namespace Space_Game.View
 
         private void DisplayForm_Load(object sender, EventArgs e)
         {
-            StartUp.Start();
+
         }
     }
 }
