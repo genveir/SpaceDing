@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Geometry
 {
-    public class Distance
+    public class Distance : IComparable
     {
         public double Value { get; set; }
 
@@ -34,6 +34,18 @@ namespace Space_Game.Geometry
         public override string ToString()
         {
             return string.Format("Distance: {0}", Value);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Distance)
+            {
+                var otherDistance = (Distance)obj;
+
+                return Value.CompareTo(otherDistance.Value);
+            }
+            else
+                throw new ArgumentException("object is not a distance");
         }
     }
 }

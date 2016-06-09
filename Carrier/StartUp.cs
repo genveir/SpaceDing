@@ -16,7 +16,7 @@ namespace Space_Game.Carrier
         private const long MILLION = 1000000;
         private const long THOUSAND = 1000;
 
-        public static void Start() {
+        public static Universe Start() {
             var Sun = new Star(
                 name: "Sun",
                 location: FixedLocation.Zero,
@@ -45,6 +45,8 @@ namespace Space_Game.Carrier
 
             var universe = new Universe();
             universe.Systems = new SolarSystem[] { system };
+
+            return universe;
         }
     }
 }

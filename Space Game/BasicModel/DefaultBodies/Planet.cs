@@ -20,5 +20,10 @@ namespace Space_Game.BasicModel.DefaultBodies
 
             return moon;
         }
+
+        public override string ToString()
+        {
+            return string.Format("Planet: {0}", Name);
+        }
     }
 }

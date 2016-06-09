@@ -11,6 +11,16 @@ namespace Space_Game.BasicModel
     {
         protected HashSet<T> members = new HashSet<T>();
 
+        public IEnumerable<T> Members { get { return members; } }
+        public IEnumerable<T> RecursiveMembers { get
+            {
+                return members
+                    .Where(member => member is UpdatableGroup<T>)
+                    .SelectMany(member => (member as UpdatableGroup<T>).RecursiveMembers)
+                    .Union(members);
+            }
+        }
+
         public void AddMember(T member)
         {
             members.Add(member);

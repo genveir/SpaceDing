@@ -29,5 +29,10 @@ namespace Space_Game.BasicModel.DefaultBodies
 
             return belt;
         }
+
+        public override string ToString()
+        {
+            return string.Format("Star: {0}", Name);
+        }
     }
 }

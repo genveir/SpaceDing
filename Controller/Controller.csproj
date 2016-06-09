@@ -49,6 +49,24 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Carrier\Carrier.csproj">
+      <Project>{B661D10D-BB93-4146-8355-11AB4D86D32C}</Project>
+      <Name>Carrier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{a3f6a600-67b8-4e8e-9f92-f5d9d738b35e}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Space Game\Space Game.csproj">
+      <Project>{a2bbfeb4-710f-4136-82d0-e1f20d05ae76}</Project>
+      <Name>Space Game</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\View\View.csproj">
+      <Project>{efd814f9-6a1c-4e4d-a8d7-40187a1ea313}</Project>
+      <Name>View</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
