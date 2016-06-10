@@ -45,7 +45,7 @@ namespace Space_Game.View
                 .Select(member => member as IBody);
 
             var outermostBodyDistance = (long)recursiveMembers
-                .Max(body => Distance.Calculate(center, (body as Body).Location))
+                .Max(body => Distance.Calculate(center, body.Location))
                 .Value;
 
             var smallestDimension = Math.Min(form.ClientRectangle.Height, form.ClientRectangle.Width);

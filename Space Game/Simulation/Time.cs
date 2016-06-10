@@ -17,6 +17,13 @@ namespace Space_Game.Simulation
             return Tick;
         }
 
+        public static long Incement(long amount)
+        {
+            Tick += amount;
+
+            return Tick;
+        }
+
         public static void Reset()
         {
             Tick = 0;

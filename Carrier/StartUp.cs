@@ -26,19 +26,19 @@ namespace Space_Game.Carrier
                 mass: 12 * MILLION,
                 startingDirection: new DegreeDirection(220),
                 startingDistance: new Distance(147 * MILLION),
-                rotationPerTick: radian.FromDegree(0.05));
+                rotationPerTick: radian.FromDegree(360.0d / 31557600));
             var Scorch = Sun.AddPlanet(
                 name: "Scorch",
                 mass: 7 * MILLION,
                 startingDirection: new DegreeDirection(270),
                 startingDistance: new Distance(80 * MILLION),
-                rotationPerTick: radian.FromDegree(0.08));
+                rotationPerTick: radian.FromDegree(360.0d / 15778800));
             var Flame = Scorch.AddMoon(
                 name: "Flame",
                 mass: 400 * THOUSAND,
                 startingDirection: new DegreeDirection(20),
                 startingDistance: new Distance(6000 * THOUSAND),
-                rotationPerTick: radian.FromDegree(1));
+                rotationPerTick: radian.FromDegree(360.0d / 1577880));
 
             var system = new SolarSystem();
             system.AddMember(Sun);

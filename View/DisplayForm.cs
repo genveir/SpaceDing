@@ -23,7 +23,8 @@ namespace Space_Game.View
             public string name;
         }
 
-        private List<DrawObject> toDraw = new List<DrawObject>();
+        private object lockObject = new object();
+        private IEnumerable<DrawObject> toDraw;
         private DrawBuffer drawBuffer;
 
         public DisplayForm()
@@ -31,6 +32,8 @@ namespace Space_Game.View
             InitializeComponent();
 
             DoubleBuffered = true;
+
+            toDraw = new List<DrawObject>();
         }
 
         private void DisplayForm_Load(object sender, EventArgs e)
@@ -40,15 +43,18 @@ namespace Space_Game.View
 
         public void Display(IEnumerable<IBody> toShow, ILocation center, double distancePerPixel)
         {
-            var newToDraw = new List<DrawObject>();
+            var newToDraw = new DrawObject[toShow.Count()];
+            var toShowArray = toShow.ToArray();
 
             var centerAsVector = new vector(center);
 
             var centerX = ClientRectangle.Width / 2;
             var centerY = ClientRectangle.Height / 2;
 
-            foreach (var body in toShow)
+            Parallel.For(0, newToDraw.Length, n =>
             {
+                var body = toShowArray[n];
+
                 var drawObject = new DrawObject() { name = body.Name, color = Color.Green };
                 if (toShow is Star) drawObject.color = Color.Red;
 
@@ -58,10 +64,10 @@ namespace Space_Game.View
 
                 drawObject.location = new Point((int)pixelVector.XOffset + centerX, (int)pixelVector.YOffset + centerY);
 
-                newToDraw.Add(drawObject);
-            }
+                newToDraw[n] = drawObject;
+            });
 
-            lock (toDraw)
+            lock (lockObject)
             {
                 toDraw = newToDraw;
             }
@@ -85,7 +91,7 @@ namespace Space_Game.View
             {
                 g.Clear(Color.Black);
 
-                lock (toDraw)
+                lock (lockObject)
                 {
                     foreach (var drawObject in toDraw)
                     {

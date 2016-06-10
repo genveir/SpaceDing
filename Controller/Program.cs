@@ -1,5 +1,6 @@
 ﻿using Space_Game.Carrier;
 using Space_Game.Shared;
+using Space_Game.Simulation;
 using Space_Game.View;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace Space_Game.Controller
 
             for (int n = 0; n < 100000; n++)
             {
+                Time.Incement(3600 * 7);
+
                 universe.Update();
 
                 view.Display(universe.Systems.First());
