@@ -27,6 +27,8 @@ namespace Space_Game.Simulation
 
         public void Update()
         {
+            Time.Increment();
+
             Parallel.ForEach(Systems, system =>
             {
                 system.Update();

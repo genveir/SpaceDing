@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Space_Game.Controller
@@ -20,7 +21,16 @@ namespace Space_Game.Controller
 
             view.Start();
 
-            view.Display(universe.Systems.First());
+            for (int n = 0; n < 100000; n++)
+            {
+                universe.Update();
+
+                view.Display(universe.Systems.First());
+
+                Thread.Sleep(10);
+            }
+
+            Console.ReadLine();
         }
     }
 }

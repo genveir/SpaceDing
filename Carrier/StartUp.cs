@@ -24,7 +24,7 @@ namespace Space_Game.Carrier
             var Hope = Sun.AddPlanet(
                 name: "Hope",
                 mass: 12 * MILLION,
-                startingDirection: new DegreeDirection(120),
+                startingDirection: new DegreeDirection(220),
                 startingDistance: new Distance(147 * MILLION),
                 rotationPerTick: radian.FromDegree(0.05));
             var Scorch = Sun.AddPlanet(
@@ -37,7 +37,7 @@ namespace Space_Game.Carrier
                 name: "Flame",
                 mass: 400 * THOUSAND,
                 startingDirection: new DegreeDirection(20),
-                startingDistance: new Distance(600 * THOUSAND),
+                startingDistance: new Distance(6000 * THOUSAND),
                 rotationPerTick: radian.FromDegree(1));
 
             var system = new SolarSystem();

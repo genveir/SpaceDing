@@ -48,7 +48,9 @@ namespace Space_Game.View
                 .Max(body => Distance.Calculate(center, (body as Body).Location))
                 .Value;
 
-            var distancePerPixel = (outermostBodyDistance / 2) / (double)form.Width;
+            var smallestDimension = Math.Min(form.ClientRectangle.Height, form.ClientRectangle.Width);
+
+            var distancePerPixel = outermostBodyDistance / (0.9d * smallestDimension / 2);
 
             form.Display(recursiveMembers, center, distancePerPixel);
         }

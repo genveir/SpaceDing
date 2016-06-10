@@ -36,6 +36,15 @@ namespace Space_Game.Geometry
             this.YOffset = vectorLoc.Y;
         }
 
+        public vector(ILocation location)
+        {
+            this.XOffset = location.X;
+            this.YOffset = location.Y;
+
+            this.Direction = Direction.Calculate(FixedLocation.Zero, location);
+            this.Distance = Distance.Calculate(FixedLocation.Zero, location);
+        }
+
         public static vector operator +(vector first, vector second)
         {
             return new vector(first.XOffset + second.XOffset, first.YOffset + second.YOffset);
@@ -44,6 +53,21 @@ namespace Space_Game.Geometry
         public static vector operator -(vector first, vector second)
         {
             return new vector(first.XOffset - second.XOffset, first.YOffset - second.YOffset);
+        }
+
+        public static vector operator /(vector vector, double divider)
+        {
+            return new vector((long)(vector.XOffset / divider), (long)(vector.YOffset / divider));
+        }
+
+        public static vector operator *(vector vector, long multiplier)
+        {
+            return new vector(vector.XOffset * multiplier, vector.YOffset * multiplier);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("vector ({0}, {1})", XOffset, YOffset);
         }
     }
 }
