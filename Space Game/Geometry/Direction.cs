@@ -14,13 +14,28 @@ namespace Space_Game.Geometry
         public radian InRadians
         {
             get { return _inRadians; }
-            set { _inRadians = value; }
+            private set { _inRadians = value; }
         }
 
         public double InDegrees
         {
             get { return _inRadians.toDouble() / Math.PI * 180.0d; }
-            set { _inRadians = value / 180.0d * Math.PI; }
+            private set { _inRadians = value / 180.0d * Math.PI; }
+        }
+
+        public static Direction FromRadian(radian value)
+        {
+            return new Direction(value);
+        }
+
+        public static Direction FromDegrees(double degrees)
+        {
+            return new Direction(degrees / 180.0d * Math.PI);
+        }
+
+        private Direction(radian inRadians)
+        {
+            this.InRadians = InRadians;
         }
 
         public static implicit operator radian(Direction dir)
@@ -30,7 +45,7 @@ namespace Space_Game.Geometry
 
         public static implicit operator Direction(radian value)
         {
-            return new RadianDirection(value);
+            return Direction.FromRadian(value);
         }
 
         public static Direction Calculate(ILocation from, ILocation to)
@@ -38,7 +53,7 @@ namespace Space_Game.Geometry
             double deltaX = to.X - from.X;
             double deltaY = to.Y - from.Y;
 
-            return new RadianDirection(Math.Atan2(deltaX, deltaY));
+            return Direction.FromRadian(Math.Atan2(deltaX, deltaY));
         }
 
         public static Direction CalculateBearing(IHasHeading fromHeading, ILocation to)
@@ -50,12 +65,12 @@ namespace Space_Game.Geometry
 
         public static Direction operator +(Direction directionOne, Direction directionTwo)
         {
-            return new RadianDirection(directionOne.InRadians + directionTwo.InRadians);
+            return Direction.FromRadian(directionOne.InRadians + directionTwo.InRadians);
         }
 
         public static Direction operator -(Direction directionOne, Direction directionTwo)
         {
-            return new RadianDirection(directionOne.InRadians - directionTwo.InRadians);
+            return Direction.FromRadian(directionOne.InRadians - directionTwo.InRadians);
         }
 
         public override string ToString()

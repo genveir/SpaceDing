@@ -56,14 +56,12 @@
     <Compile Include="BasicModel\IHasHeading.cs" />
     <Compile Include="BasicModel\IIsPowered.cs" />
     <Compile Include="BasicModel\IUpdatable.cs" />
-    <Compile Include="Geometry\DegreeDirection.cs" />
     <Compile Include="Geometry\Direction.cs" />
     <Compile Include="Geometry\Distance.cs" />
     <Compile Include="Geometry\Location\FixedLocation.cs" />
     <Compile Include="Geometry\Location\ILocation.cs" />
     <Compile Include="Geometry\Location\OrbitLocation.cs" />
     <Compile Include="Geometry\radian.cs" />
-    <Compile Include="Geometry\RadianDirection.cs" />
     <Compile Include="Geometry\vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Simulation\Model\SolarSystem.cs" />
