@@ -16,11 +16,25 @@ namespace Space_Game.View
 {
     public partial class DisplayForm : Form
     {
-        private struct DrawObject
+        private class DrawObject
         {
             public Point location;
             public Color color;
             public string name;
+            public int size;
+            private int _halfsize;
+            public int halfsize
+            {
+                get
+                {
+                    if (_halfsize == 0)
+                    {
+                        _halfsize = size / 2;
+                        if (_halfsize < 1) _halfsize = 1;
+                    }
+                    return _halfsize;
+                }
+            }
         }
 
         private object lockObject = new object();
@@ -56,13 +70,14 @@ namespace Space_Game.View
                 var body = toShowArray[n];
 
                 var drawObject = new DrawObject() { name = body.Name, color = Color.Green };
-                if (toShow is Star) drawObject.color = Color.Red;
+                if (body is Star) drawObject.color = Color.Red;
 
                 var locationAsVector = new vector(body.Location);
                 var relativeposition = locationAsVector - centerAsVector;
                 var pixelVector = relativeposition / distancePerPixel;
 
                 drawObject.location = new Point((int)pixelVector.XOffset + centerX, (int)pixelVector.YOffset + centerY);
+                drawObject.size = (int)Math.Sqrt(body.Mass) / 1000;
 
                 newToDraw[n] = drawObject;
             });
@@ -77,15 +92,15 @@ namespace Space_Game.View
 
         private void DisplayForm_Paint(object sender, PaintEventArgs e)
         {
+            CreateFrame();
+
             Graphics g = e.Graphics;
 
             g.DrawImage(drawBuffer.Current, 0, 0);
             drawBuffer.Flip();
-
-            CreateNextFrame();
         }
 
-        private void CreateNextFrame()
+        private void CreateFrame()
         { 
             using (Graphics g = Graphics.FromImage(drawBuffer.Current))
             {
@@ -97,16 +112,16 @@ namespace Space_Game.View
                     {
                         g.DrawEllipse(
                             new Pen(drawObject.color),
-                            drawObject.location.X - 3,
-                            drawObject.location.Y - 3,
-                            7,
-                            7);
+                            drawObject.location.X - drawObject.halfsize,
+                            drawObject.location.Y - drawObject.halfsize,
+                            drawObject.size,
+                            drawObject.size);
 
                         g.DrawString(
                             drawObject.name,
                             new Font(FontFamily.GenericMonospace, 12),
                             new SolidBrush(drawObject.color),
-                            drawObject.location.X + 6,
+                            drawObject.location.X + drawObject.halfsize + 3,
                             drawObject.location.Y);
                     }
 

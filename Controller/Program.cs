@@ -13,6 +13,12 @@ namespace Space_Game.Controller
 {
     class Program
     {
+        private struct UniverseViewPair
+        {
+            public Universe universe;
+            public IView view;
+        }
+
         static void Main(string[] args)
         {
             var universe = StartUp.Start();
@@ -22,18 +28,26 @@ namespace Space_Game.Controller
 
             view.Start();
 
-            for (int n = 0; n < 100000; n++)
-            {
-                Time.Incement(3600 * 7);
+            var universeAndView = new UniverseViewPair();
+            universeAndView.universe = universe;
+            universeAndView.view = view;
 
-                universe.Update();
-
-                view.Display(universe.Systems.First());
-
-                Thread.Sleep(10);
-            }
+            var timer = new Timer(Update, universeAndView, 0, 1000 / 60);
 
             Console.ReadLine();
+        }
+
+        private static void Update(Object updateinfo)
+        {
+            var universeAndView = (UniverseViewPair)updateinfo;
+            var universe = universeAndView.universe;
+            var view = universeAndView.view;
+
+            Time.Incement(3600 * 7);
+
+            universe.Update();
+
+            view.Display(universe.Systems.First());
         }
     }
 }
