@@ -36,6 +36,26 @@ namespace Space_Game.Geometry
             return new Distance(hypot);
         }
 
+        public static Distance operator +(Distance first, Distance second)
+        {
+            return new Distance(first.Value + second.Value);
+        }
+
+        public static Distance operator -(Distance first, Distance second)
+        {
+            return new Distance(first.Value - second.Value);
+        }
+
+        public static Distance operator *(Distance first, Distance second)
+        {
+            return new Distance(first.Value * second.Value);
+        }
+
+        public static Distance operator /(Distance first, Distance second)
+        {
+            return new Distance(first.Value / second.Value);
+        }
+
         public override string ToString()
         {
             return string.Format("Distance: {0}", Value);

@@ -25,6 +25,8 @@ namespace Space_Game.Geometry
             this.Y = (long)(Math.Cos(direction.InRadians.toDouble()) * distance) + location.Y;
         }
 
+        public void Fix() { }
+
         public override string ToString()
         {
             return string.Format("FixedLocation: ({0}, {1})", X, Y);

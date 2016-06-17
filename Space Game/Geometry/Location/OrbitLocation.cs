@@ -69,6 +69,11 @@ namespace Space_Game.Geometry
             }
         }
 
+        public void Fix()
+        {
+            CalculateCurrentPosition(Time.Tick);
+        }
+
         private void CalculateCurrentPosition(long tick)
         {
             currentTick = tick;

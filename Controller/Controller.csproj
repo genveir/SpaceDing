@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="SpaceGameController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,10 +53,6 @@
     <ProjectReference Include="..\Carrier\Carrier.csproj">
       <Project>{B661D10D-BB93-4146-8355-11AB4D86D32C}</Project>
       <Name>Carrier</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{a3f6a600-67b8-4e8e-9f92-f5d9d738b35e}</Project>
-      <Name>Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Space Game\Space Game.csproj">
       <Project>{a2bbfeb4-710f-4136-82d0-e1f20d05ae76}</Project>

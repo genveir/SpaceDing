@@ -21,5 +21,10 @@ namespace Space_Game.BasicModel.DefaultBodies
         public ILocation Location { get; set; }
 
         public long Mass { get; set; }
+
+        protected override void ObservedUpdate()
+        {
+            Location.Fix();
+        }
     }
 }

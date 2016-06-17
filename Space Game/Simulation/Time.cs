@@ -8,7 +8,7 @@ namespace Space_Game.Simulation
 {
     public class Time
     {
-        public static long Tick { get; set; }
+        public static long Tick;
 
         public static long Increment()
         {

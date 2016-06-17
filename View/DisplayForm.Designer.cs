@@ -39,6 +39,7 @@
             this.Text = "DisplayForm";
             this.Load += new System.EventHandler(this.DisplayForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DisplayForm_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DisplayForm_KeyDown);
             this.Resize += new System.EventHandler(this.DisplayForm_Resize);
             this.ResumeLayout(false);
 

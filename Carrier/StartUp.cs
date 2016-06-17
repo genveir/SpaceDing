@@ -41,6 +41,15 @@ namespace Space_Game.Carrier
                 startingDistance: new Distance(6000 * MILLION),
                 rotationPerTick: radian.FromDegree(360.0d / 1577880));
 
+            var Belt = Sun.AddAsteroidBelt("Baumfalk Belt",
+                innerRange: new Distance (220 * BILLION),
+                outerRange: new Distance (260 * BILLION));
+
+            Belt.GenerateAsteroids(
+                10000,
+                namePrefix: "BB",
+                orbitSpeed: radian.FromDegree(360.0d / 50000000));
+
             var system = new SolarSystem();
             system.AddMember(Sun);
 

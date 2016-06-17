@@ -41,14 +41,16 @@ namespace Space_Game.View
         private object lockObject = new object();
         private IEnumerable<DrawObject> toDraw;
         private DrawBuffer drawBuffer;
+        private FormView handler;
 
-        public DisplayForm()
+        public DisplayForm(FormView handler)
         {
             InitializeComponent();
 
             DoubleBuffered = true;
 
             toDraw = new List<DrawObject>();
+            this.handler = handler;
         }
 
         private void DisplayForm_Load(object sender, EventArgs e)
@@ -72,6 +74,7 @@ namespace Space_Game.View
 
                 var drawObject = new DrawObject() { name = body.Name, color = Color.Green };
                 if (body is Star) drawObject.color = Color.Red;
+                if (body.Mass < 5000) drawObject.name = "";
 
                 var locationAsVector = new vector(body.Location);
                 var relativeposition = locationAsVector - centerAsVector;
@@ -79,6 +82,8 @@ namespace Space_Game.View
 
                 drawObject.location = new Point((int)pixelVector.XOffset + centerX, (int)pixelVector.YOffset + centerY);
                 drawObject.size = (int)Math.Sqrt(body.Mass) / 1000;
+
+                if (drawObject.size < 1) drawObject.size = 1;
 
                 newToDraw[n] = drawObject;
             });
@@ -134,6 +139,14 @@ namespace Space_Game.View
         private void DisplayForm_Resize(object sender, EventArgs e)
         {
             drawBuffer = new DrawBuffer(ClientRectangle, 2);
+        }
+
+        private void DisplayForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                handler.Update();
+            } 
         }
     }
 }

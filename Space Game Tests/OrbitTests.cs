@@ -94,6 +94,7 @@ namespace Space_Game
 
         [TestCase(3L, 4L, 5.0d)]
         [TestCase(0L, 100L, 100.0d)]
+        [TestCase(3000000L, 4000000L, 5000000d)]
         public void HypothenuseIsCorrect(long X, long Y, double correctDifference)
         {
             var distance = Distance.Calculate(new FixedLocation(0, X), new FixedLocation(Y, 0)).Value;

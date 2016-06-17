@@ -10,5 +10,7 @@ namespace Space_Game.Geometry
     {
         long X { get; }
         long Y { get; }
+
+        void Fix();
     }
 }

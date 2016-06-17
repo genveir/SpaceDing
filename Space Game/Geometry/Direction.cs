@@ -38,6 +38,11 @@ namespace Space_Game.Geometry
             return new Direction(degrees / 180.0d * Math.PI);
         }
 
+        public static Direction FromCirclePortion(double portion)
+        {
+            return new Direction(portion * 2 * Math.PI);
+        }
+
         public static implicit operator radian(Direction dir)
         {
             return dir.InRadians;

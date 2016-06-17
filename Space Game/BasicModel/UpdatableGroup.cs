@@ -1,24 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using Space_Game.Simulation;
 
 namespace Space_Game.BasicModel
 {
     public abstract class UpdatableGroup<T> : IUpdatable
         where T : IUpdatable
     {
-        protected HashSet<T> members = new HashSet<T>();
+        private long lastUpdate;
+
+        protected ConcurrentBag<T> members = new ConcurrentBag<T>();
 
         public IEnumerable<T> Members { get { return members; } }
         public IEnumerable<T> RecursiveMembers { get
             {
-                return members
-                    .Where(member => member is UpdatableGroup<T>)
-                    .SelectMany(member => (member as UpdatableGroup<T>).RecursiveMembers)
-                    .Union(members);
+                ConcurrentBag<T> recursiveMembers = new ConcurrentBag<T>();
+
+                AddRecursiveMembers(recursiveMembers);
+
+                return recursiveMembers;
             }
+        }
+
+        protected void AddRecursiveMembers(ConcurrentBag<T> recursiveMembers)
+        {
+            Parallel.ForEach(Members, member =>
+            {
+                recursiveMembers.Add(member);
+
+                var group = member as UpdatableGroup<T>;
+
+                if (group != null)
+                {
+                    group.AddRecursiveMembers(recursiveMembers);
+                }
+            });
         }
 
         public void AddMember(T member)
@@ -28,23 +49,23 @@ namespace Space_Game.BasicModel
 
         public void RemoveMember(T member)
         {
-            members.Remove(member);
+            members.TryTake(out member);
         }
 
         public void AddMembers(IEnumerable<T> members)
         {
-            foreach(var member in members)
+            Parallel.ForEach(members, member =>
             {
                 AddMember(member);
-            }
+            });
         }
 
         public void RemoveMembers(IEnumerable<T> members)
         {
-            foreach(var member in members)
+            Parallel.ForEach(members, member =>
             {
                 RemoveMember(member);
-            }
+            });
         }
 
         private bool _observed;
@@ -63,12 +84,20 @@ namespace Space_Game.BasicModel
 
         public virtual void Update()
         {
+            lock (this)
+            {
+                if (lastUpdate == Time.Tick) return;
+                lastUpdate = Time.Tick;
+            }
+
             if (Observed)
             {
                 Parallel.ForEach(members, member =>
                 {
                     member.Update();
                 });
+
+                ObservedUpdate();
             }
             else
             {
@@ -76,9 +105,14 @@ namespace Space_Game.BasicModel
             }
         }
 
+        protected virtual void ObservedUpdate()
+        {
+            
+        }
+
         protected virtual void UnObservedUpdate()
         {
-            // by default, an unobserved update does nothing
+            
         }
     }
 }

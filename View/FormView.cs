@@ -1,7 +1,6 @@
 ﻿using Space_Game.BasicModel;
 using Space_Game.BasicModel.DefaultBodies;
 using Space_Game.Geometry;
-using Space_Game.Shared;
 using Space_Game.Simulation;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,8 @@ namespace Space_Game.View
     public class FormView : IView
     {
         private DisplayForm form;
-        private bool CanDraw;
+
+        public ManualResetEvent RequestUpdate { get; set; }
 
         public void Initialize()
         {
@@ -26,18 +26,15 @@ namespace Space_Game.View
 
         public void Start()
         {
-            form = new DisplayForm();
+            form = new DisplayForm(this);
 
             ThreadPool.QueueUserWorkItem(callback => Application.Run(form));
 
-            CanDraw = true;
+            RequestUpdate = new ManualResetEvent(true);
         }
 
         public void Display(SolarSystem system)
         {
-            if (!CanDraw) return;
-            CanDraw = false;
-
             var starLocations = system.Members
                 .Where(body => body is Star)
                 .Select(star => (star as Star).Location);
@@ -59,8 +56,11 @@ namespace Space_Game.View
             var distancePerPixel = outermostBodyDistance / (0.9d * smallestDimension / 2);
 
             form.Display(recursiveMembers, center, distancePerPixel);
+        }
 
-            CanDraw = true;
+        public void Update()
+        {
+            RequestUpdate.Set();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Space_Game.Carrier;
-using Space_Game.Shared;
 using Space_Game.Simulation;
 using Space_Game.View;
 using System;
@@ -11,13 +10,15 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Controller
 {
-    class Program
+    class SpaceGameController
     {
         private struct UniverseViewPair
         {
             public Universe universe;
             public IView view;
         }
+
+        private static UniverseViewPair toUpdate;
 
         static void Main(string[] args)
         {
@@ -28,20 +29,23 @@ namespace Space_Game.Controller
 
             view.Start();
 
-            var universeAndView = new UniverseViewPair();
-            universeAndView.universe = universe;
-            universeAndView.view = view;
+            toUpdate = new UniverseViewPair();
+            toUpdate.universe = universe;
+            toUpdate.view = view;
 
-            var timer = new Timer(Update, universeAndView, 0, 1000 / 60);
+            while (true)
+            {
+                view.RequestUpdate.WaitOne();
+                view.RequestUpdate.Reset();
 
-            Console.ReadLine();
+                Update();
+            }
         }
 
-        private static void Update(Object updateinfo)
+        private static void Update()
         {
-            var universeAndView = (UniverseViewPair)updateinfo;
-            var universe = universeAndView.universe;
-            var view = universeAndView.view;
+            var universe = toUpdate.universe;
+            var view = toUpdate.view;
 
             Time.Increment(3600 * 7);
 

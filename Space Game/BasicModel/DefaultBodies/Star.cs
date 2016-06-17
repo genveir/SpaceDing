@@ -21,9 +21,9 @@ namespace Space_Game.BasicModel.DefaultBodies
             return planet;
         }
 
-        public AsteroidBelt AddAsteroidBelt(string name)
+        public AsteroidBelt AddAsteroidBelt(string name, Distance innerRange, Distance outerRange)
         {
-            var belt = new AsteroidBelt(name);
+            var belt = new AsteroidBelt(Location, name, innerRange, outerRange);
 
             members.Add(belt);
 
