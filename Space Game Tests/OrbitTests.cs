@@ -85,8 +85,22 @@ namespace Space_Game
             for (int n = 0; n < 400; n++)
             {
                 Time.Increment();
-                Assert.LessOrEqual(distance - Distance.Calculate(orbit1, orbit2), 1.5d);
+
+                var difference = Math.Abs(distance - Distance.Calculate(orbit1, orbit2));
+
+                Assert.LessOrEqual(difference, 10.0d);
             }
+        }
+
+        [TestCase(3L, 4L, 5.0d)]
+        [TestCase(0L, 100L, 100.0d)]
+        public void HypothenuseIsCorrect(long X, long Y, double correctDifference)
+        {
+            var distance = Distance.Calculate(new FixedLocation(0, X), new FixedLocation(Y, 0)).Value;
+
+            var difference = Math.Abs(distance - correctDifference);
+
+            Assert.LessOrEqual(difference, 0.01d);
         }
     }
 }

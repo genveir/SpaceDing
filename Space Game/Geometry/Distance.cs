@@ -23,12 +23,17 @@ namespace Space_Game.Geometry
         public static Distance Calculate(ILocation locationOne, ILocation locationTwo)
         {
             long XLeg = locationOne.X - locationTwo.X;
-            long XLegSquare = XLeg * XLeg;
 
             long YLeg = locationOne.Y - locationTwo.Y;
-            long YLegSquare = YLeg * YLeg;
 
-            return new Distance(Math.Sqrt(XLegSquare + YLegSquare));
+            if (XLeg == 0)
+                if (YLeg != 0) return new Distance(Math.Abs(YLeg));
+                else return new Distance(0);
+
+            var ratio = (double)YLeg / (double)XLeg;
+            var hypot = Math.Abs(XLeg) * Math.Sqrt(1 + ratio * ratio);
+
+            return new Distance(hypot);
         }
 
         public override string ToString()

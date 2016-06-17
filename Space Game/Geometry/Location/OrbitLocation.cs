@@ -77,5 +77,10 @@ namespace Space_Game.Geometry
 
             locAtCurrentTick = new FixedLocation(center, currentAngle, distance);
         }
+
+        public override string ToString()
+        {
+            return string.Format("OrbitLocation ({0}, {1})", X, Y);
+        }
     }
 }

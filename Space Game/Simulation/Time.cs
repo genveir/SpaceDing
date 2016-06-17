@@ -17,7 +17,7 @@ namespace Space_Game.Simulation
             return Tick;
         }
 
-        public static long Incement(long amount)
+        public static long Increment(long amount)
         {
             Tick += amount;
 

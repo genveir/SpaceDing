@@ -12,6 +12,7 @@ namespace Space_Game.Carrier
 {
     public class StartUp
     {
+        private const long TRILLION = 1000000000000;
         private const long BILLION = 1000000000;
         private const long MILLION = 1000000;
         private const long THOUSAND = 1000;
@@ -24,20 +25,20 @@ namespace Space_Game.Carrier
             var Hope = Sun.AddPlanet(
                 name: "Hope",
                 mass: 12 * MILLION,
-                startingDirection: new DegreeDirection(220),
-                startingDistance: new Distance(147 * MILLION),
+                startingDirection: Direction.FromDegrees(220),
+                startingDistance: new Distance(147 * BILLION),
                 rotationPerTick: radian.FromDegree(360.0d / 31557600));
             var Scorch = Sun.AddPlanet(
                 name: "Scorch",
                 mass: 7 * MILLION,
-                startingDirection: new DegreeDirection(270),
-                startingDistance: new Distance(80 * MILLION),
+                startingDirection: Direction.FromDegrees(270),
+                startingDistance: new Distance(80 * BILLION),
                 rotationPerTick: radian.FromDegree(360.0d / 15778800));
             var Flame = Scorch.AddMoon(
                 name: "Flame",
                 mass: 400 * THOUSAND,
-                startingDirection: new DegreeDirection(20),
-                startingDistance: new Distance(6000 * THOUSAND),
+                startingDirection: Direction.FromDegrees(20),
+                startingDistance: new Distance(6000 * MILLION),
                 rotationPerTick: radian.FromDegree(360.0d / 1577880));
 
             var system = new SolarSystem();

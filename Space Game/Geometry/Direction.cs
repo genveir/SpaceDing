@@ -23,6 +23,11 @@ namespace Space_Game.Geometry
             private set { _inRadians = value / 180.0d * Math.PI; }
         }
 
+        private Direction(radian inRadians)
+        {
+            this.InRadians = inRadians;
+        }
+
         public static Direction FromRadian(radian value)
         {
             return new Direction(value);
@@ -31,11 +36,6 @@ namespace Space_Game.Geometry
         public static Direction FromDegrees(double degrees)
         {
             return new Direction(degrees / 180.0d * Math.PI);
-        }
-
-        private Direction(radian inRadians)
-        {
-            this.InRadians = InRadians;
         }
 
         public static implicit operator radian(Direction dir)

@@ -65,6 +65,11 @@ namespace Space_Game.Geometry
             return new vector(vector.XOffset * multiplier, vector.YOffset * multiplier);
         }
 
+        public static vector Calculate(ILocation from, ILocation to)
+        {
+            return new vector(new FixedLocation(to.X - from.X, to.Y - from.Y));
+        }
+
         public override string ToString()
         {
             return string.Format("vector ({0}, {1})", XOffset, YOffset);

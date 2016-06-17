@@ -43,7 +43,7 @@ namespace Space_Game.Controller
             var universe = universeAndView.universe;
             var view = universeAndView.view;
 
-            Time.Incement(3600 * 7);
+            Time.Increment(3600 * 7);
 
             universe.Update();
 

@@ -32,7 +32,7 @@ namespace Space_Game
         [Test]
         public void VectorsHaveTheDirectionTheyreCreatedWith()
         {
-            vector v1 = new vector(new RadianDirection(new radian(Math.PI)), new Distance(10000));
+            vector v1 = new vector(Direction.FromRadian(new radian(Math.PI)), new Distance(10000));
 
             Assert.AreEqual(new radian(Math.PI), v1.Direction.InRadians);
         }
