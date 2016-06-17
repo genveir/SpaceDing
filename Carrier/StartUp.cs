@@ -18,7 +18,10 @@ namespace Space_Game.Carrier
         private const long THOUSAND = 1000;
 
         public static Universe Start() {
+            var system = new SolarSystem();
+
             var Sun = new Star(
+                system,
                 name: "Sun",
                 location: FixedLocation.Zero,
                 mass: 10 * BILLION);
@@ -50,7 +53,6 @@ namespace Space_Game.Carrier
                 namePrefix: "BB",
                 orbitSpeed: radian.FromDegree(360.0d / 50000000));
 
-            var system = new SolarSystem();
             system.AddMember(Sun);
 
             var universe = new Universe();

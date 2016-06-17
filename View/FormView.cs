@@ -47,7 +47,7 @@ namespace Space_Game.View
                 (long)starLocations.Average(loc => loc.X),
                 (long)starLocations.Average(loc => loc.Y));
 
-            recursiveMembers = system.RecursiveMembers
+            recursiveMembers = system.Members
                 .Where(member => member is IBody)
                 .Select(member => member as IBody);
 

@@ -14,7 +14,7 @@ namespace Space_Game
         [Test]
         public void BeltHasTheRightNumberOfAsteroids()
         {
-            var Belt = new AsteroidBelt(FixedLocation.Zero, "belt", new Distance(1000), new Distance(2000));
+            var Belt = new AsteroidBelt(null, FixedLocation.Zero, "belt", new Distance(1000), new Distance(2000));
 
             Belt.GenerateAsteroids(1, "b", new radian(0.1d));
 
@@ -24,14 +24,14 @@ namespace Space_Game
         [Test]
         public void AsteroidsAreInRecursiveMembers()
         {
-            var Sun = new Star("Star", FixedLocation.Zero, 100);
+            var Sun = new Star(null, "Star", FixedLocation.Zero, 100);
 
             Sun.AddAsteroidBelt("belt", new Distance(1000), new Distance(2000))
                 .GenerateAsteroids(10, "b", new radian(0.1d));
 
-            var recursiveMembers = Sun.RecursiveMembers;
+            var recursiveMembers = Sun.Members;
 
-            Assert.AreEqual(11, recursiveMembers.Count());
+            Assert.AreEqual(10, recursiveMembers.Count());
         }
     }
 }

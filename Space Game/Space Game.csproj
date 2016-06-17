@@ -49,13 +49,13 @@
     <Compile Include="BasicModel\DefaultBodies\Asteroid.cs" />
     <Compile Include="BasicModel\DefaultBodies\AsteroidBelt.cs" />
     <Compile Include="BasicModel\DefaultBodies\Body.cs" />
-    <Compile Include="BasicModel\UpdatableGroup.cs" />
     <Compile Include="BasicModel\DefaultBodies\Planet.cs" />
     <Compile Include="BasicModel\DefaultBodies\Star.cs" />
     <Compile Include="BasicModel\IBody.cs" />
     <Compile Include="BasicModel\IHasHeading.cs" />
     <Compile Include="BasicModel\IIsPowered.cs" />
     <Compile Include="BasicModel\IUpdatable.cs" />
+    <Compile Include="BasicModel\IUpdatableGroup.cs" />
     <Compile Include="Geometry\Direction.cs" />
     <Compile Include="Geometry\Distance.cs" />
     <Compile Include="Geometry\Location\FixedLocation.cs" />

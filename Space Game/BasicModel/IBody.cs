@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Space_Game.BasicModel
 {
-    public interface IBody
+    public interface IBody : IUpdatable
     {
         string Name { get; set; }
         long Mass { get; set; }

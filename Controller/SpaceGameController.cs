@@ -35,8 +35,8 @@ namespace Space_Game.Controller
 
             while (true)
             {
-                view.RequestUpdate.WaitOne();
-                view.RequestUpdate.Reset();
+                //view.RequestUpdate.WaitOne();
+                //view.RequestUpdate.Reset();
 
                 Update();
             }
@@ -47,11 +47,11 @@ namespace Space_Game.Controller
             var universe = toUpdate.universe;
             var view = toUpdate.view;
 
-            Time.Increment(3600 * 7);
-
-            universe.Update();
+            Time.Increment(3600 * 24);
 
             view.Display(universe.Systems.First());
+
+            universe.Update();
         }
     }
 }

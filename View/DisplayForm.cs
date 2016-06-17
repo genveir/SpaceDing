@@ -55,7 +55,7 @@ namespace Space_Game.View
 
         private void DisplayForm_Load(object sender, EventArgs e)
         {
-            drawBuffer = new DrawBuffer(ClientRectangle, 2);
+            drawBuffer = new DrawBuffer(ClientRectangle, 1);
         }
 
         public void Display(IEnumerable<IBody> toShow, ILocation center, double distancePerPixel)
