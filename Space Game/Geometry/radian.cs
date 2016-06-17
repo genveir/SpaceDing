@@ -60,6 +60,16 @@ namespace Space_Game.Geometry
             return new radian(first.value / second);
         }
 
+        public static bool operator <(radian first, radian second)
+        {
+            return first.value < second.value;
+        }
+
+        public static bool operator >(radian first, radian second)
+        {
+            return first.value > second.value;
+        }
+
         public override string ToString()
         {
             return string.Format("radian: " + value / TAU);

@@ -48,7 +48,6 @@
     <Compile Include="DisplayForm.Designer.cs">
       <DependentUpon>DisplayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawBuffer.cs" />
     <Compile Include="FormView.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

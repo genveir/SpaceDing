@@ -17,6 +17,8 @@ namespace Space_Game.View
 {
     public partial class DisplayForm : Form
     {
+        private Bitmap bmpBackground;
+
         private class DrawObject
         {
             public Point location;
@@ -40,7 +42,6 @@ namespace Space_Game.View
 
         private object lockObject = new object();
         private IEnumerable<DrawObject> toDraw;
-        private DrawBuffer drawBuffer;
         private FormView handler;
 
         public DisplayForm(FormView handler)
@@ -55,7 +56,7 @@ namespace Space_Game.View
 
         private void DisplayForm_Load(object sender, EventArgs e)
         {
-            drawBuffer = new DrawBuffer(ClientRectangle, 1);
+            bmpBackground = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
         }
 
         public void Display(IEnumerable<IBody> toShow, ILocation center, double distancePerPixel)
@@ -102,13 +103,12 @@ namespace Space_Game.View
 
             Graphics g = e.Graphics;
 
-            g.DrawImage(drawBuffer.Current, 0, 0);
-            drawBuffer.Flip();
+            g.DrawImage(bmpBackground, 0, 0);
         }
 
         private void CreateFrame()
-        { 
-            using (Graphics g = Graphics.FromImage(drawBuffer.Current))
+        {
+            using (Graphics g = Graphics.FromImage(bmpBackground))
             {
                 g.Clear(Color.Black);
 
@@ -138,7 +138,7 @@ namespace Space_Game.View
 
         private void DisplayForm_Resize(object sender, EventArgs e)
         {
-            drawBuffer = new DrawBuffer(ClientRectangle, 2);
+            bmpBackground = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
 
             handler.Redraw();
         }

@@ -69,6 +69,8 @@ namespace Space_Game.Geometry
             }
         }
 
+        public radian RotationSpeed { get { return rotationPerTick; } }
+
         public void Fix()
         {
             CalculateCurrentPosition(Time.Tick);
