@@ -33,24 +33,33 @@ namespace Space_Game.View
             RequestUpdate = new ManualResetEvent(true);
         }
 
+        private IEnumerable<IBody> recursiveMembers;
+        private ILocation center;
+        private long outermostBodyDistance;
+
         public void Display(SolarSystem system)
         {
             var starLocations = system.Members
                 .Where(body => body is Star)
                 .Select(star => (star as Star).Location);
 
-            ILocation center = new FixedLocation(
+            center = new FixedLocation(
                 (long)starLocations.Average(loc => loc.X),
                 (long)starLocations.Average(loc => loc.Y));
 
-            var recursiveMembers = system.RecursiveMembers
+            recursiveMembers = system.RecursiveMembers
                 .Where(member => member is IBody)
                 .Select(member => member as IBody);
 
-            var outermostBodyDistance = (long)recursiveMembers
+            outermostBodyDistance = (long)recursiveMembers
                 .Max(body => Distance.Calculate(center, body.Location))
                 .Value;
 
+            Draw();
+        }
+
+        private void Draw()
+        {
             var smallestDimension = Math.Min(form.ClientRectangle.Height, form.ClientRectangle.Width);
 
             var distancePerPixel = outermostBodyDistance / (0.9d * smallestDimension / 2);
@@ -61,6 +70,11 @@ namespace Space_Game.View
         public void Update()
         {
             RequestUpdate.Set();
+        }
+
+        public void Redraw()
+        {
+            Draw();
         }
     }
 }

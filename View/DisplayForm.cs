@@ -139,6 +139,8 @@ namespace Space_Game.View
         private void DisplayForm_Resize(object sender, EventArgs e)
         {
             drawBuffer = new DrawBuffer(ClientRectangle, 2);
+
+            handler.Redraw();
         }
 
         private void DisplayForm_KeyDown(object sender, KeyEventArgs e)
