@@ -14,11 +14,13 @@ namespace Space_Game
         [Test]
         public void BeltHasTheRightNumberOfAsteroids()
         {
-            var Belt = new AsteroidBelt(null, FixedLocation.Zero, "belt", new Distance(1000), new Distance(2000));
+            var Sun = new Star(null, "Star", FixedLocation.Zero, 100);
 
-            Belt.GenerateAsteroids(1, "b", new radian(0.1d), new radian(0.2d));
+            var belt = Sun.AddAsteroidBelt("belt", new Distance(1000), new Distance(2000));
 
-            Assert.AreEqual(1, Belt.Members.Count());
+            belt.GenerateAsteroids(1, "b", new radian(0.1d));
+
+            Assert.AreEqual(1, belt.Members.Count());
         }
 
         [Test]
@@ -27,27 +29,11 @@ namespace Space_Game
             var Sun = new Star(null, "Star", FixedLocation.Zero, 100);
 
             Sun.AddAsteroidBelt("belt", new Distance(1000), new Distance(2000))
-                .GenerateAsteroids(10, "b", new radian(0.1d), new radian(0.1d));
+                .GenerateAsteroids(10, "b", new radian(0.1d));
 
             var recursiveMembers = Sun.Members;
 
             Assert.AreEqual(10, recursiveMembers.Count());
-        }
-
-        [Test]
-        public void SpeedsFallInTheRightRange()
-        {
-            var Belt = new AsteroidBelt(null, FixedLocation.Zero, "belt", new Distance(1000), new Distance(2000));
-
-            Belt.GenerateAsteroids(10000, "b", new radian(0.1d), new radian(0.2d));
-
-            foreach (var asteroid in Belt.Members)
-            {
-                var orbitSpeed = ((OrbitLocation)asteroid.Location).RotationSpeed;
-
-                Assert.True(orbitSpeed > new radian(0.09999d));
-                Assert.True(orbitSpeed < new radian(0.20001d));
-            }
         }
     }
 }

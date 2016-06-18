@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Space Game\Space Game.csproj">

@@ -15,12 +15,19 @@ namespace Space_Game.BasicModel.DefaultBodies
             :base(parent, name, location, mass)
         {
             _members = new ConcurrentBag<IBody>();
+
+            parent.AddMember(this);
         }
 
         public Planet AddPlanet(string name, long mass, Direction startingDirection, Distance startingDistance, radian rotationPerTick)
         {
             var planet = new Planet(this, name, new OrbitLocation(this, startingDirection, startingDistance, rotationPerTick), mass);
 
+            return AddPlanet(planet);
+        }
+
+        public Planet AddPlanet(Planet planet)
+        {
             AddMember(planet);
 
             return planet;
@@ -30,6 +37,11 @@ namespace Space_Game.BasicModel.DefaultBodies
         {
             var belt = new AsteroidBelt(this, Location, name, innerRange, outerRange);
 
+            return AddAsteroidBelt(belt);
+        }
+
+        public AsteroidBelt AddAsteroidBelt(AsteroidBelt belt)
+        {
             return belt;
         }
 

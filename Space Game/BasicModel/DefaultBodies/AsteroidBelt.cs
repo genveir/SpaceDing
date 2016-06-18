@@ -16,7 +16,7 @@ namespace Space_Game.BasicModel.DefaultBodies
         public Distance OuterRange { get; set; }
         public ILocation Center { get; set; }
 
-        public AsteroidBelt(IUpdatableGroup<IBody> parent, ILocation center, string name, Distance innerRange, Distance outerRange)
+        internal AsteroidBelt(IUpdatableGroup<IBody> parent, ILocation center, string name, Distance innerRange, Distance outerRange)
         {
             Parent = parent;
             Center = center;
@@ -27,11 +27,9 @@ namespace Space_Game.BasicModel.DefaultBodies
             _members = new ConcurrentBag<IBody>();
         }
 
-        public void GenerateAsteroids(int number, string namePrefix, radian innerOrbitSpeed, radian outerOrbitSpeed)
+        public void GenerateAsteroids(int number, string namePrefix, radian orbitSpeed)
         {
             Distance rangeDepth = OuterRange - InnerRange;
-            radian speedRange = outerOrbitSpeed - innerOrbitSpeed;
-            radian speedPlus = (innerOrbitSpeed < outerOrbitSpeed) ? innerOrbitSpeed : outerOrbitSpeed;
 
             Random rnd = new Random();
 
@@ -40,7 +38,6 @@ namespace Space_Game.BasicModel.DefaultBodies
                 var ratio = rnd.NextDouble();
                 var angle = Direction.FromCirclePortion(rnd.NextDouble());
 
-                var orbitSpeed = ratio * speedRange + speedPlus;
                 var orbitDistance = new Distance(ratio * rangeDepth + InnerRange);
 
                 var asteroid = new Asteroid(

@@ -8,6 +8,8 @@ namespace Space_Game.Geometry
 {
     public class Distance : IComparable
     {
+        public static Distance Zero = new Distance(0);
+
         public double Value { get; set; }
 
         public Distance(double value)

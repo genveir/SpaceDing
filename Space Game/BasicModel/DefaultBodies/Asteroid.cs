@@ -9,7 +9,7 @@ namespace Space_Game.BasicModel.DefaultBodies
 {
     public class Asteroid : Body
     {
-        public Asteroid(string name, ILocation location, long mass, AsteroidBelt parent) :
+        internal Asteroid(string name, ILocation location, long mass, AsteroidBelt parent) :
             base(parent, name, location, mass)
         {
             

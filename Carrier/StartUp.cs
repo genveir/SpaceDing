@@ -17,7 +17,12 @@ namespace Space_Game.Carrier
         private const long MILLION = 1000000;
         private const long THOUSAND = 1000;
 
-        public static Universe Start() {
+        public static Universe Start()
+        {
+
+            var system = new SystemGenerator().Generate();
+
+            /*
             var system = new SolarSystem();
 
             var Sun = new Star(
@@ -51,10 +56,9 @@ namespace Space_Game.Carrier
             Belt.GenerateAsteroids(
                 number: 10000,
                 namePrefix: "JB",
-                innerOrbitSpeed: radian.FromDegree(-360.0d / 50000000),
-                outerOrbitSpeed: radian.FromDegree(360.0d / 55000000));
+                orbitSpeed: radian.FromDegree(-360.0d / 50000000));
 
-            system.AddMember(Sun);
+            */
 
             var universe = new Universe();
             universe.Systems = new SolarSystem[] { system };

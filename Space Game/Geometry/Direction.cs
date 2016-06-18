@@ -9,6 +9,8 @@ namespace Space_Game.Geometry
 {
     public class Direction
     {
+        public static Direction Zero = new Direction(0);
+
         private radian _inRadians;
 
         public radian InRadians
