@@ -49,9 +49,11 @@ namespace Space_Game.View
                 (long)starLocations.Average(loc => loc.X),
                 (long)starLocations.Average(loc => loc.Y));
 
-            outermostBodyDistance = (long)members
+            var currentOutermost = (long)members
                 .Max(body => Distance.Calculate(center, body.Location))
                 .Value;
+
+            outermostBodyDistance = (currentOutermost > outermostBodyDistance) ? currentOutermost : outermostBodyDistance;
 
             Draw();
         }

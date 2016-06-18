@@ -75,7 +75,8 @@ namespace Space_Game.View
 
                 var drawObject = new DrawObject() { name = body.Name, color = Color.Green };
                 if (body is Star) drawObject.color = Color.Red;
-                if (body.Mass < 5000) drawObject.name = "";
+
+                if (body.Mass < 5000000) drawObject.name = "";
 
                 var locationAsVector = new vector(body.Location);
                 var relativeposition = locationAsVector - centerAsVector;

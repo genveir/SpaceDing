@@ -4,6 +4,7 @@ using Space_Game.Geometry;
 using Space_Game.Simulation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,8 @@ namespace Space_Game.Carrier
 
         private const long TRILLION = 1000000000000;
         private const long BILLION = 1000000000;
-        private const int MILLION = 1000000;
-        private const int THOUSAND = 1000;
+        private const long MILLION = 1000000;
+        private const long THOUSAND = 1000;
 
         public SolarSystem Generate()
         {
@@ -29,13 +30,13 @@ namespace Space_Game.Carrier
             var numDirectMembers = 0;
             do
             {
-                if (rnd.NextDouble() < 0.8d)
+                if (rnd.NextDouble() < 0.80d)
                     currentOutermost = GeneratePlanet(star, numDirectMembers, currentOutermost);
                 else
                     currentOutermost = GenerateAsteroidBelt(star, currentOutermost);
 
                 numDirectMembers++;
-            } while (star.Members.Count() < 50000 && numDirectMembers < 15);
+            } while (star.Members.Count() < 50000 && numDirectMembers < 12);
 
             return system;
         }
@@ -44,7 +45,9 @@ namespace Space_Game.Carrier
         {
             var name = "Star";
 
-            long mass = rnd.Next(5000, 15000) * MILLION;
+            long mass = rnd.Next(2000, 8000) * MILLION;
+
+            Debug.Print(mass.ToString());
 
             return new Star(parent, name, FixedLocation.Zero, mass);
         }
@@ -58,25 +61,25 @@ namespace Space_Game.Carrier
 
             if (relativePosition < 5)
             {
-                mass = rnd.Next(5 * MILLION, 20 * MILLION);
+                mass = rnd.Next(5, 20) * MILLION;
                 
                 numMoons = rnd.Next(1, 2) + rnd.Next(-2, 1);
                 if (numMoons < 0) numMoons = 0;
             }
             else
             {
-                mass = rnd.Next(100 * MILLION, 200 * MILLION);
+                mass = rnd.Next(100, 200) * MILLION;
 
                 numMoons = rnd.Next(1, 6) + rnd.Next(1, 6) + rnd.Next(1, 6);
             }
 
-            startingDistance = currentOutermost + new Distance(rnd.Next(100, 200) * BILLION);
+            startingDistance = currentOutermost + new Distance(rnd.Next(300, 600) * BILLION);
 
             startingDirection = Direction.FromCirclePortion(rnd.NextDouble());
             radian rotationPerTick = RotationAtDistance(startingDistance);
             var planet = star.AddPlanet("planet" + relativePosition, mass, startingDirection, startingDistance, rotationPerTick);
 
-            var currentOutermostMoon = Distance.Zero;
+            var currentOutermostMoon = new Distance(10 * BILLION);
             for (int n = 0; n < numMoons; n++)
             {
                 currentOutermostMoon = GenerateMoon(planet, n, mass, currentOutermostMoon);
@@ -91,7 +94,7 @@ namespace Space_Game.Carrier
 
             long mass = (long)promilleOfMass * rnd.Next(1, 15);
 
-            var startingDistance = currentOutermost + new Distance(rnd.Next(10000, 50000) * MILLION);
+            var startingDistance = currentOutermost + new Distance(rnd.Next(10, 20) * BILLION);
             var startingDirection = Direction.FromCirclePortion(rnd.NextDouble());
             var rotationPerTick = RotationAtDistance(startingDistance);
 
@@ -102,10 +105,10 @@ namespace Space_Game.Carrier
 
         private Distance GenerateAsteroidBelt(Star star, Distance currentOutermost)
         {
-            int numberOfAsteroids = rnd.Next(1000, 10000);
+            int numberOfAsteroids = rnd.Next(500, 3000);
 
-            var innerRange = currentOutermost + new Distance(rnd.Next(100, 200) * BILLION);
-            var outerRange = innerRange + new Distance(rnd.Next(80, 150) * BILLION);
+            var innerRange = currentOutermost + new Distance(rnd.Next(400, 500) * BILLION);
+            var outerRange = innerRange + new Distance(rnd.Next(500, 1000) * BILLION);
 
             var belt = star.AddAsteroidBelt("belt", innerRange, outerRange);
 
@@ -118,7 +121,18 @@ namespace Space_Game.Carrier
 
         private radian RotationAtDistance(Distance distance)
         {
-            return radian.FromDegree(1.0d / 100000.0d);
+            // at 147 billion, take 365 days
+            var year = 31557600; // one year in ticks
+            var earthOrbitDist = new Distance(147 * BILLION);
+
+            radian earthOrbitSpeed = radian.FromDegree(360.0d / year);
+
+            var distInEarthOrbits = distance / earthOrbitDist;
+
+            var dir = 1.0d;
+            if (rnd.NextDouble() < 0.15d) dir = -1;
+
+            return new radian(dir * (earthOrbitSpeed.toDouble() / (distInEarthOrbits * distInEarthOrbits)));
         }
     }
 }
