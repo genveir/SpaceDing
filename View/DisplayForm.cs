@@ -75,6 +75,7 @@ namespace Space_Game.View
 
                 var drawObject = new DrawObject() { name = body.Name, color = Color.Green };
                 if (body is Star) drawObject.color = Color.Red;
+                if (body is Asteroid) drawObject.color = Color.Blue;
 
                 if (body.Mass < 5000000) drawObject.name = "";
 
@@ -83,7 +84,7 @@ namespace Space_Game.View
                 var pixelVector = relativeposition / distancePerPixel;
 
                 drawObject.location = new Point((int)pixelVector.XOffset + centerX, (int)pixelVector.YOffset + centerY);
-                drawObject.size = (int)Math.Sqrt(body.Mass) / 1000;
+                drawObject.size = (int)Math.Log10(Math.Pow(body.Mass, 1.0d / 3.0d));
 
                 if (drawObject.size < 1) drawObject.size = 1;
 

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Space_Game.View
+namespace Space_Game
 { 
     public interface IView
     {

@@ -47,7 +47,7 @@ namespace Space_Game.Controller
             var universe = toUpdate.universe;
             var view = toUpdate.view;
 
-            Time.Increment(3600 * 24);
+            Time.Increment(36000 * 24);
 
             view.Display(universe.Systems.First());
 

@@ -20,11 +20,15 @@ namespace Space_Game.Carrier
         private const long MILLION = 1000000;
         private const long THOUSAND = 1000;
 
+        bool turnsClockwise;
+
         public SolarSystem Generate()
         {
             var system = new SolarSystem();
 
             var star = GenerateStar(system);
+
+            turnsClockwise = rnd.NextDouble() < 0.5d;
 
             Distance currentOutermost = new Distance(200 * BILLION);
             var numDirectMembers = 0;
@@ -129,8 +133,7 @@ namespace Space_Game.Carrier
 
             var distInEarthOrbits = distance / earthOrbitDist;
 
-            var dir = 1.0d;
-            if (rnd.NextDouble() < 0.15d) dir = -1;
+            double dir = (turnsClockwise) ? 1.0d : -1.0d;
 
             return new radian(dir * (earthOrbitSpeed.toDouble() / (distInEarthOrbits * distInEarthOrbits)));
         }
