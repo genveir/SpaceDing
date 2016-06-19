@@ -10,12 +10,17 @@ namespace Space_Game
 { 
     public interface IView
     {
+        /// <summary>
+        /// request an update of the viewstate from the controller
+        /// </summary>
         ManualResetEvent RequestUpdate { get; set; }
-
-        void Initialize();
 
         void Start();
 
+        void Initialize(SolarSystem system);
+
         void Display(SolarSystem system);
+
+        void Redraw();
     }
 }

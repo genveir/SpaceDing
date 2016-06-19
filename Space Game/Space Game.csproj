@@ -61,6 +61,7 @@
     <Compile Include="Geometry\Location\FixedLocation.cs" />
     <Compile Include="Geometry\Location\ILocation.cs" />
     <Compile Include="Geometry\Location\OrbitLocation.cs" />
+    <Compile Include="Geometry\Location\RelativeLocation.cs" />
     <Compile Include="Geometry\radian.cs" />
     <Compile Include="Geometry\vector.cs" />
     <Compile Include="IView.cs" />

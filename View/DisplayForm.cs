@@ -140,6 +140,8 @@ namespace Space_Game.View
 
         private void DisplayForm_Resize(object sender, EventArgs e)
         {
+            if (ClientRectangle.Width == 0 || ClientRectangle.Height == 0) return;
+
             bmpBackground = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
 
             handler.Redraw();

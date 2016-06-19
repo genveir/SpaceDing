@@ -12,41 +12,27 @@ namespace Space_Game.Controller
 {
     class SpaceGameController
     {
-        private struct UniverseViewPair
-        {
-            public Universe universe;
-            public IView view;
-        }
-
-        private static UniverseViewPair toUpdate;
-
         static void Main(string[] args)
         {
             var universe = StartUp.Start();
 
             IView view = new FormView();
-            view.Initialize();
 
             view.Start();
 
-            toUpdate = new UniverseViewPair();
-            toUpdate.universe = universe;
-            toUpdate.view = view;
+            view.Initialize(universe.Systems.First());
 
             while (true)
             {
-                //view.RequestUpdate.WaitOne();
-                //view.RequestUpdate.Reset();
+                view.RequestUpdate.WaitOne();
+                view.RequestUpdate.Reset();
 
-                Update();
+                Update(universe, view);
             }
         }
 
-        private static void Update()
+        private static void Update(Universe universe, IView view)
         {
-            var universe = toUpdate.universe;
-            var view = toUpdate.view;
-
             Time.Increment(36000 * 24);
 
             view.Display(universe.Systems.First());

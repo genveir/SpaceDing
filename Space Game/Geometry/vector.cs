@@ -8,6 +8,8 @@ namespace Space_Game.Geometry
 {
     public struct vector
     {
+        public static vector Zero = new vector(0, 0);
+
         public long XOffset { get; set; }
         public long YOffset { get; set; }
 

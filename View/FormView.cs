@@ -18,7 +18,7 @@ namespace Space_Game.View
 
         public ManualResetEvent RequestUpdate { get; set; }
 
-        public void Initialize()
+        public FormView()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -33,38 +33,38 @@ namespace Space_Game.View
             RequestUpdate = new ManualResetEvent(true);
         }
 
+        private vector viewShift;
+        private double zoomFactor;
         private IEnumerable<IBody> members;
-        private ILocation center;
-        private long outermostBodyDistance;
+
+        public void Initialize(SolarSystem system)
+        {
+            members = system.Members;
+
+            var currentOutermost = (long)members
+                .Max(body => Distance.Calculate(FixedLocation.Zero, body.Location))
+                .Value;
+
+            var smallestDimension = 
+                Math.Min(form.ClientRectangle.Height, form.ClientRectangle.Width);
+
+            zoomFactor = currentOutermost / (0.9d * smallestDimension / 2);
+
+            viewShift = vector.Zero;
+        }
 
         public void Display(SolarSystem system)
         {
             members = system.Members;
-
-            var starLocations = members
-                .Where(body => body is Star)
-                .Select(star => (star as Star).Location);
-
-            center = new FixedLocation(
-                (long)starLocations.Average(loc => loc.X),
-                (long)starLocations.Average(loc => loc.Y));
-
-            var currentOutermost = (long)members
-                .Max(body => Distance.Calculate(center, body.Location))
-                .Value;
-
-            outermostBodyDistance = (currentOutermost > outermostBodyDistance) ? currentOutermost : outermostBodyDistance;
 
             Draw();
         }
 
         private void Draw()
         {
-            var smallestDimension = Math.Min(form.ClientRectangle.Height, form.ClientRectangle.Width);
+            var viewCenter = new RelativeLocation(FixedLocation.Zero, viewShift);
 
-            var distancePerPixel = outermostBodyDistance / (0.9d * smallestDimension / 2);
-
-            form.Display(members, center, distancePerPixel);
+            form.Display(members, viewCenter, zoomFactor);
         }
 
         public void Update()
