@@ -66,6 +66,19 @@ namespace Space_Game.Geometry
         {
             return new vector(vector.XOffset * multiplier, vector.YOffset * multiplier);
         }
+        public static vector operator *(long multiplier, vector vector)
+        {
+            return new vector(vector.XOffset * multiplier, vector.YOffset * multiplier);
+        }
+
+        public static vector operator *(vector vector, double multiplier)
+        {
+            return new vector((long)(vector.XOffset * multiplier), (long)(vector.YOffset * multiplier));
+        }
+        public static vector operator *(double multiplier, vector vector)
+        {
+            return new vector((long)(vector.XOffset * multiplier), (long)(vector.YOffset * multiplier));
+        }
 
         public static vector Calculate(ILocation from, ILocation to)
         {

@@ -4,6 +4,7 @@ using Space_Game.Geometry;
 using Space_Game.Simulation;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -65,6 +66,15 @@ namespace Space_Game.View
             var viewCenter = new RelativeLocation(FixedLocation.Zero, viewShift);
 
             form.Display(members, viewCenter, zoomFactor);
+        }
+
+        public void AlterZoom(bool increase, FixedLocation location)
+        {
+            zoomFactor = zoomFactor * (increase ? 1.1d : 0.9d);
+
+            vector locationAsVector = new vector(location);
+            vector relativeLocation = locationAsVector - viewShift;
+            viewShift += (increase ? -0.1d : 0.1d) * relativeLocation;
         }
 
         public void Update()

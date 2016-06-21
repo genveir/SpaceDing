@@ -1,4 +1,7 @@
-﻿namespace Space_Game.View
+﻿using System;
+using System.Windows.Forms;
+
+namespace Space_Game.View
 {
     partial class DisplayForm
     {
@@ -33,14 +36,15 @@
             // DisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(876, 703);
             this.Name = "DisplayForm";
             this.Text = "DisplayForm";
-            this.Load += new System.EventHandler(this.DisplayForm_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DisplayForm_Paint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DisplayForm_KeyDown);
-            this.Resize += new System.EventHandler(this.DisplayForm_Resize);
+            this.Load += new EventHandler(this.DisplayForm_Load);
+            this.Paint += new PaintEventHandler(this.DisplayForm_Paint);
+            this.KeyDown += new KeyEventHandler(this.DisplayForm_KeyDown);
+            this.Resize += new EventHandler(this.DisplayForm_Resize);
+            this.MouseWheel += new MouseEventHandler(DisplayForm_MouseWheel);
             this.ResumeLayout(false);
 
         }

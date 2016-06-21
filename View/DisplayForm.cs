@@ -43,6 +43,7 @@ namespace Space_Game.View
         private object lockObject = new object();
         private IEnumerable<DrawObject> toDraw;
         private FormView handler;
+        private LocationTranslator translator;
 
         public DisplayForm(FormView handler)
         {
@@ -52,6 +53,12 @@ namespace Space_Game.View
 
             toDraw = new List<DrawObject>();
             this.handler = handler;
+        }
+
+        private void DisplayForm_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta < 0) handler.AlterZoom(true, translator.ToFixedLocation(e.Location));
+            else handler.AlterZoom(false, translator.ToFixedLocation(e.Location));
         }
 
         private void DisplayForm_Load(object sender, EventArgs e)
@@ -64,10 +71,7 @@ namespace Space_Game.View
             var newToDraw = new DrawObject[toShow.Count()];
             var toShowArray = toShow.ToArray();
 
-            var centerAsVector = new vector(center);
-
-            var centerX = ClientRectangle.Width / 2;
-            var centerY = ClientRectangle.Height / 2;
+            translator = new LocationTranslator(center, ClientRectangle, distancePerPixel);
 
             Parallel.For(0, newToDraw.Length, n =>
             {
@@ -79,11 +83,7 @@ namespace Space_Game.View
 
                 if (body.Mass < 5000000) drawObject.name = null;
 
-                var locationAsVector = new vector(body.Location);
-                var relativeposition = locationAsVector - centerAsVector;
-                var pixelVector = relativeposition / distancePerPixel;
-
-                drawObject.location = new Point((int)pixelVector.XOffset + centerX, (int)pixelVector.YOffset + centerY);
+                drawObject.location = translator.ToPoint(body.Location);
                 drawObject.size = (int)Math.Log10(Math.Pow(body.Mass, 1.0d / 3.0d));
 
                 if (drawObject.size < 1) drawObject.size = 1;

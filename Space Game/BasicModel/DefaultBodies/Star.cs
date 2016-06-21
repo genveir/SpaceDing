@@ -16,7 +16,8 @@ namespace Space_Game.BasicModel.DefaultBodies
         {
             _members = new ConcurrentBag<IBody>();
 
-            parent.AddMember(this);
+            if (parent != null)
+                parent.AddMember(this);
         }
 
         public Planet AddPlanet(string name, long mass, Direction startingDirection, Distance startingDistance, radian rotationPerTick)
