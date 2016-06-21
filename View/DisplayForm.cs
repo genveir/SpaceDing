@@ -77,7 +77,7 @@ namespace Space_Game.View
                 if (body is Star) drawObject.color = Color.Red;
                 if (body is Asteroid) drawObject.color = Color.Blue;
 
-                if (body.Mass < 5000000) drawObject.name = "";
+                if (body.Mass < 5000000) drawObject.name = null;
 
                 var locationAsVector = new vector(body.Location);
                 var relativeposition = locationAsVector - centerAsVector;
@@ -125,12 +125,13 @@ namespace Space_Game.View
                             drawObject.size,
                             drawObject.size);
 
-                        g.DrawString(
-                            drawObject.name,
-                            new Font(FontFamily.GenericMonospace, 12),
-                            new SolidBrush(drawObject.color),
-                            drawObject.location.X + drawObject.halfsize + 3,
-                            drawObject.location.Y);
+                        if (drawObject.name != null)
+                            g.DrawString(
+                                drawObject.name,
+                                new Font(FontFamily.GenericMonospace, 12),
+                                new SolidBrush(drawObject.color),
+                                drawObject.location.X + drawObject.halfsize + 3,
+                                drawObject.location.Y);
                     }
 
                     Text = Time.Tick.ToString();

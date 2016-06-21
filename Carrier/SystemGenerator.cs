@@ -30,6 +30,8 @@ namespace Space_Game.Carrier
 
             turnsClockwise = rnd.NextDouble() < 0.5d;
 
+            var totalMembers = rnd.Next(1, 10) + rnd.Next(1, 10) + rnd.Next(1, 10);
+
             Distance currentOutermost = new Distance(200 * BILLION);
             var numDirectMembers = 0;
             do
@@ -40,7 +42,7 @@ namespace Space_Game.Carrier
                     currentOutermost = GenerateAsteroidBelt(star, currentOutermost);
 
                 numDirectMembers++;
-            } while (star.Members.Count() < 50000 && numDirectMembers < 12);
+            } while (numDirectMembers < totalMembers);
 
             return system;
         }
