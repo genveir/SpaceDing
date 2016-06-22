@@ -75,6 +75,8 @@ namespace Space_Game.View
             vector locationAsVector = new vector(location);
             vector relativeLocation = locationAsVector - viewShift;
             viewShift += (increase ? -0.1d : 0.1d) * relativeLocation;
+
+            Draw();
         }
 
         public void Update()

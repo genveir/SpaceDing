@@ -24,8 +24,8 @@ namespace Space_Game.Controller
 
             while (true)
             {
-                //view.RequestUpdate.WaitOne();
-                //view.RequestUpdate.Reset();
+                view.RequestUpdate.WaitOne();
+                view.RequestUpdate.Reset();
 
                 Update(universe, view);
             }
@@ -33,7 +33,7 @@ namespace Space_Game.Controller
 
         private static void Update(Universe universe, IView view)
         {
-            Time.Increment(36000 * 24);
+            Time.Increment(3600 * 24);
 
             view.Display(universe.Systems.First());
 

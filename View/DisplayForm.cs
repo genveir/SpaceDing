@@ -81,12 +81,14 @@ namespace Space_Game.View
                 if (body is Star) drawObject.color = Color.Red;
                 if (body is Asteroid) drawObject.color = Color.Blue;
 
-                if (body.Mass < 5000000) drawObject.name = null;
-
                 drawObject.location = translator.ToPoint(body.Location);
-                drawObject.size = (int)Math.Log10(Math.Pow(body.Mass, 1.0d / 3.0d));
+                var zoomMod = 50000000 / distancePerPixel;
+                drawObject.size = (int)(zoomMod * Math.Pow(body.Mass, 1.0d / 3.0d));
 
-                if (drawObject.size < 1) drawObject.size = 1;
+                if (drawObject.size <= 1) {
+                    drawObject.size = 1;
+                    drawObject.name = null;
+                }
 
                 newToDraw[n] = drawObject;
             });
