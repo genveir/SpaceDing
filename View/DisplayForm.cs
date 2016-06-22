@@ -1,5 +1,6 @@
 ﻿using Space_Game.BasicModel;
 using Space_Game.BasicModel.DefaultBodies;
+using Space_Game.Carrier.Ships;
 using Space_Game.Geometry;
 using Space_Game.Simulation;
 using System;
@@ -77,10 +78,12 @@ namespace Space_Game.View
             {
                 var body = toShowArray[n];
                 bool isStar = body is Star;
+                bool isShip = body is Ship;
 
                 var drawObject = new DrawObject() { name = body.Name, color = Color.Green };
                 if (isStar) drawObject.color = Color.Red;
                 if (body is Asteroid) drawObject.color = Color.Blue;
+                if (isShip) drawObject.color = Color.Yellow;
 
                 drawObject.location = translator.ToPoint(body.Location);
                 var zoomMod = 50000000 / distancePerPixel;
@@ -89,9 +92,9 @@ namespace Space_Game.View
                 if (drawSize <= 1.0d) {
                     if (drawSize > 0.01)
                         drawSize = 1.0d;
-                    else if (!isStar) drawSize = 0.0d;
+                    else if (!isStar && !isShip) drawSize = 0.0d;
 
-                    if (!isStar) drawObject.name = null;
+                    if (!isStar && !isShip) drawObject.name = null;
                 }
                 drawObject.size = (int)drawSize;
 

@@ -1,5 +1,6 @@
 ﻿using Space_Game.BasicModel;
 using Space_Game.BasicModel.DefaultBodies;
+using Space_Game.Carrier.Ships;
 using Space_Game.Geometry;
 using Space_Game.Simulation;
 using System;
@@ -22,43 +23,9 @@ namespace Space_Game.Carrier
 
             var system = new SystemGenerator().Generate();
 
-            /*
-            var system = new SolarSystem();
+            var carrier = new Ship("Carrier", new PoweredLocation(new FixedLocation(100 * BILLION, 0), Direction.FromDegrees(0), 20000));
 
-            var Sun = new Star(
-                system,
-                name: "Sun",
-                location: FixedLocation.Zero,
-                mass: 10 * BILLION);
-            var Hope = Sun.AddPlanet(
-                name: "Hope",
-                mass: 12 * MILLION,
-                startingDirection: Direction.FromDegrees(220),
-                startingDistance: new Distance(147 * BILLION),
-                rotationPerTick: radian.FromDegree(360.0d / 31557600));
-            var Scorch = Sun.AddPlanet(
-                name: "Scorch",
-                mass: 7 * MILLION,
-                startingDirection: Direction.FromDegrees(270),
-                startingDistance: new Distance(80 * BILLION),
-                rotationPerTick: radian.FromDegree(360.0d / 15778800));
-            var Flame = Scorch.AddMoon(
-                name: "Flame",
-                mass: 400 * THOUSAND,
-                startingDirection: Direction.FromDegrees(20),
-                startingDistance: new Distance(6000 * MILLION),
-                rotationPerTick: radian.FromDegree(360.0d / 1577880));
-
-            var Belt = Sun.AddAsteroidBelt("Baumfalk Belt",
-                innerRange: new Distance (220 * BILLION),
-                outerRange: new Distance (320 * BILLION));
-
-            Belt.GenerateAsteroids(
-                number: 10000,
-                namePrefix: "JB",
-                orbitSpeed: radian.FromDegree(-360.0d / 50000000));
-
-            */
+            system.AddMember(carrier);
 
             var universe = new Universe();
             universe.Systems = new SolarSystem[] { system };

@@ -58,6 +58,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Carrier\Carrier.csproj">
+      <Project>{b661d10d-bb93-4146-8355-11ab4d86d32c}</Project>
+      <Name>Carrier</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Space Game\Space Game.csproj">
       <Project>{a2bbfeb4-710f-4136-82d0-e1f20d05ae76}</Project>
       <Name>Space Game</Name>

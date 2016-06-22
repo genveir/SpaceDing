@@ -25,6 +25,12 @@ namespace Space_Game.Geometry
             this.Y = (long)(Math.Cos(direction.InRadians.toDouble()) * distance) + location.Y;
         }
 
+        public FixedLocation(ILocation startingPoint, vector difference)
+        {
+            this.X = startingPoint.X + difference.XOffset;
+            this.Y = startingPoint.Y + difference.YOffset;
+        }
+
         public void Fix() { }
 
         public override string ToString()
