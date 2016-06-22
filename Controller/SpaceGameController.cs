@@ -24,8 +24,8 @@ namespace Space_Game.Controller
 
             while (true)
             {
-                view.RequestUpdate.WaitOne();
-                view.RequestUpdate.Reset();
+                //view.RequestUpdate.WaitOne();
+                //view.RequestUpdate.Reset();
 
                 Update(universe, view);
             }

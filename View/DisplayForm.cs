@@ -76,19 +76,24 @@ namespace Space_Game.View
             Parallel.For(0, newToDraw.Length, n =>
             {
                 var body = toShowArray[n];
+                bool isStar = body is Star;
 
                 var drawObject = new DrawObject() { name = body.Name, color = Color.Green };
-                if (body is Star) drawObject.color = Color.Red;
+                if (isStar) drawObject.color = Color.Red;
                 if (body is Asteroid) drawObject.color = Color.Blue;
 
                 drawObject.location = translator.ToPoint(body.Location);
                 var zoomMod = 50000000 / distancePerPixel;
-                drawObject.size = (int)(zoomMod * Math.Pow(body.Mass, 1.0d / 3.0d));
+                double drawSize = (zoomMod * Math.Pow(body.Mass, 1.0d / 3.0d));
 
-                if (drawObject.size <= 1) {
-                    drawObject.size = 1;
-                    drawObject.name = null;
+                if (drawSize <= 1.0d) {
+                    if (drawSize > 0.01)
+                        drawSize = 1.0d;
+                    else if (!isStar) drawSize = 0.0d;
+
+                    if (!isStar) drawObject.name = null;
                 }
+                drawObject.size = (int)drawSize;
 
                 newToDraw[n] = drawObject;
             });
@@ -120,12 +125,13 @@ namespace Space_Game.View
                 {
                     foreach (var drawObject in toDraw)
                     {
-                        g.DrawEllipse(
-                            new Pen(drawObject.color),
-                            drawObject.location.X - drawObject.halfsize,
-                            drawObject.location.Y - drawObject.halfsize,
-                            drawObject.size,
-                            drawObject.size);
+                        if (drawObject.size > 0)
+                            g.DrawEllipse(
+                                new Pen(drawObject.color),
+                                drawObject.location.X - drawObject.halfsize,
+                                drawObject.location.Y - drawObject.halfsize,
+                                drawObject.size,
+                                drawObject.size);
 
                         if (drawObject.name != null)
                             g.DrawString(
