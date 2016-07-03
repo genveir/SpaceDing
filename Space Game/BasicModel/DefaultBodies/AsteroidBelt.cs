@@ -43,7 +43,7 @@ namespace Space_Game.BasicModel.DefaultBodies
                 var asteroid = new Asteroid(
                     name: string.Format("{0}_{1}", namePrefix, n),
                     location: new OrbitLocation(Center, angle, orbitDistance, orbitSpeed),
-                    mass: 1000,
+                    mass: 100000,
                     parent: this);
 
                 AddMember(asteroid);

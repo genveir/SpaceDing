@@ -20,7 +20,6 @@ namespace Space_Game.Carrier
 
         public static Universe Start()
         {
-
             var system = new SystemGenerator().Generate();
 
             var carrierBase = new DummyPart(80000, 0);
