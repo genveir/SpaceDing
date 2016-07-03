@@ -40,9 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ship\IShip.cs" />
-    <Compile Include="Ship\PoweredLocation.cs" />
-    <Compile Include="Ship\Ship.cs" />
+    <Compile Include="Ships\IShip.cs" />
+    <Compile Include="Ships\Parts\IEngine.cs" />
+    <Compile Include="Ships\Parts\Implementations\DummyPart.cs" />
+    <Compile Include="Ships\Parts\Implementations\NuclearEngine.cs" />
+    <Compile Include="Ships\Parts\IPart.cs" />
+    <Compile Include="Ships\PoweredLocation.cs" />
+    <Compile Include="Ships\Ship.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemGenerator.cs" />
