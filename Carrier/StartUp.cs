@@ -18,7 +18,7 @@ namespace Space_Game.Carrier
         private const long MILLION = 1000000;
         private const long THOUSAND = 1000;
 
-        public static Universe Start()
+        public static Universe SetupUniverse()
         {
             var system = new SystemGenerator().Generate();
 

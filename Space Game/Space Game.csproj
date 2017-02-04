@@ -64,11 +64,16 @@
     <Compile Include="Geometry\Location\RelativeLocation.cs" />
     <Compile Include="Geometry\radian.cs" />
     <Compile Include="Geometry\vector.cs" />
-    <Compile Include="IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Simulation\Model\SolarSystem.cs" />
     <Compile Include="Simulation\Time.cs" />
     <Compile Include="Simulation\Model\Universe.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationDomain\ApplicationDomain.csproj">
+      <Project>{89CF601B-12FA-4802-A4C3-57C60CB7CD16}</Project>
+      <Name>ApplicationDomain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

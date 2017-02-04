@@ -58,6 +58,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApplicationDomain\ApplicationDomain.csproj">
+      <Project>{89CF601B-12FA-4802-A4C3-57C60CB7CD16}</Project>
+      <Name>ApplicationDomain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Carrier\Carrier.csproj">
       <Project>{b661d10d-bb93-4146-8355-11ab4d86d32c}</Project>
       <Name>Carrier</Name>

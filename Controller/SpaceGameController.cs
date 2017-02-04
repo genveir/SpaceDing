@@ -1,4 +1,6 @@
-﻿using Space_Game.Carrier;
+﻿using ApplicationDomain;
+using Space_Game.BasicModel;
+using Space_Game.Carrier;
 using Space_Game.Simulation;
 using Space_Game.View;
 using System;
@@ -10,34 +12,40 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Controller
 {
-    class SpaceGameController
+    class SpaceGameController : IController
     {
-        static void Main(string[] args)
-        {
-            var universe = StartUp.Start();
+        IView<IBody> view;
+        IModel model;
+        IDrawModel<IBody> currentDrawModel;
 
-            IView view = new FormView();
+        public void Start()
+        {
+            model = StartUp.SetupUniverse();
+
+            view = new FormView(this);
 
             view.Start();
 
-            view.Initialize(universe.Systems.First());
+            currentDrawModel = ((Universe)model).Systems.First();
 
-            while (true)
-            {
-                //view.RequestUpdate.WaitOne();
-                //view.RequestUpdate.Reset();
+            view.Initialize(currentDrawModel);
 
-                Update(universe, view);
-            }
+            Update(0);
         }
 
-        private static void Update(Universe universe, IView view)
+        public void Update(long ticks)
         {
-            Time.Increment(3600 * 24);
+            Time.Increment(ticks);
 
-            view.Display(universe.Systems.First());
+            view.Updating.WaitOne();
+            view.Display(currentDrawModel);
 
-            universe.Update();
+            model.Update();
+        }
+
+        public void Stop()
+        {
+
         }
     }
 }

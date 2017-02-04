@@ -166,5 +166,10 @@ namespace Space_Game.View
                 handler.Update();
             } 
         }
+
+        private void DisplayForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            handler.Close();
+        }
     }
 }

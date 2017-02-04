@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3EE069F1-0B28-499B-888A-429B0301047D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{89CF601B-12FA-4802-A4C3-57C60CB7CD16}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Space_Game.Controller</RootNamespace>
-    <AssemblyName>Controller</AssemblyName>
+    <RootNamespace>ApplicationDomain</RootNamespace>
+    <AssemblyName>ApplicationDomain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,30 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="SpaceGameController.cs" />
+    <Compile Include="IController.cs" />
+    <Compile Include="IDrawModel.cs" />
+    <Compile Include="IModel.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ApplicationDomain\ApplicationDomain.csproj">
-      <Project>{89CF601B-12FA-4802-A4C3-57C60CB7CD16}</Project>
-      <Name>ApplicationDomain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Carrier\Carrier.csproj">
-      <Project>{B661D10D-BB93-4146-8355-11AB4D86D32C}</Project>
-      <Name>Carrier</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Space Game\Space Game.csproj">
-      <Project>{a2bbfeb4-710f-4136-82d0-e1f20d05ae76}</Project>
-      <Name>Space Game</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\View\View.csproj">
-      <Project>{efd814f9-6a1c-4e4d-a8d7-40187a1ea313}</Project>
-      <Name>View</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

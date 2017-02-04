@@ -1,4 +1,5 @@
-﻿using Space_Game.BasicModel;
+﻿using ApplicationDomain;
+using Space_Game.BasicModel;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Simulation
 {
-    public class SolarSystem : IUpdatable, IUpdatableGroup<IBody>
+    public class SolarSystem : IUpdatable, IUpdatableGroup<IBody>, IDrawModel<IBody>
     {
         public IUpdatableGroup<IBody> Parent { get; set; }
 

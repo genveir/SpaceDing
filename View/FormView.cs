@@ -1,4 +1,5 @@
-﻿using Space_Game.BasicModel;
+﻿using ApplicationDomain;
+using Space_Game.BasicModel;
 using Space_Game.BasicModel.DefaultBodies;
 using Space_Game.Geometry;
 using Space_Game.Simulation;
@@ -13,34 +14,50 @@ using System.Windows.Forms;
 
 namespace Space_Game.View
 {
-    public class FormView : IView
+    public class FormView : IView<IBody>
     {
         private DisplayForm form;
 
-        public ManualResetEvent RequestUpdate { get; set; }
+        public IController Controller { get; set; }
 
-        public FormView()
+        static FormView()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
         }
 
+        public FormView(IController controller)
+        {
+            Controller = controller;
+
+            Updating = new ManualResetEvent(true);
+        }
+
+        public ManualResetEvent Updating { get; }
+
         public void Start()
         {
             form = new DisplayForm(this);
 
-            ThreadPool.QueueUserWorkItem(callback => Application.Run(form));
+            ThreadPool.QueueUserWorkItem(callback =>
+                {
+                    Thread.CurrentThread.IsBackground = false;
+                    Application.Run(form);
+                });
+        }
 
-            RequestUpdate = new ManualResetEvent(true);
+        public void Close()
+        {
+            Controller.Stop();
         }
 
         private vector viewShift;
         private double zoomFactor;
         private IEnumerable<IBody> members;
 
-        public void Initialize(SolarSystem system)
+        public void Initialize(IDrawModel<IBody> model)
         {
-            members = system.Members;
+            members = model.Members;
 
             var currentOutermost = (long)members
                 .Max(body => Distance.Calculate(FixedLocation.Zero, body.Location))
@@ -54,18 +71,22 @@ namespace Space_Game.View
             viewShift = vector.Zero;
         }
 
-        public void Display(SolarSystem system)
+        public void Display(IDrawModel<IBody> model)
         {
-            members = system.Members;
+            members = model.Members;
 
             Draw();
         }
 
         private void Draw()
         {
+            Updating.Reset();
+
             var viewCenter = new RelativeLocation(FixedLocation.Zero, viewShift);
 
             form.Display(members, viewCenter, zoomFactor);
+
+            Updating.Set();
         }
 
         public void AlterZoom(bool increase, FixedLocation location)
@@ -79,14 +100,14 @@ namespace Space_Game.View
             Draw();
         }
 
-        public void Update()
-        {
-            RequestUpdate.Set();
-        }
-
         public void Redraw()
         {
             Draw();
+        }
+
+        internal void Update()
+        {
+             Controller.Update(60 * 60 * 24); // 1 day
         }
     }
 }

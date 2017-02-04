@@ -1,4 +1,5 @@
-﻿using Space_Game.BasicModel;
+﻿using ApplicationDomain;
+using Space_Game.BasicModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Simulation
 {
-    public class Universe : IUpdatable
+    public class Universe : IUpdatable, IModel
     {
         public IEnumerable<SolarSystem> Systems { get; set; }
 
