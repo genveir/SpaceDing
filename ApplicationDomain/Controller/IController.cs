@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationDomain
+namespace ApplicationDomain.Controller
 {
-    public interface IController
+    public interface IController<Loc>
     {
+        ISelector<Loc> Selector { get; }
+
         void Start();
 
         void Update(long ticksToSimulate);

@@ -42,6 +42,7 @@ namespace Space_Game.View
             this.Text = "DisplayForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DisplayForm_FormClosed);
             this.Load += new System.EventHandler(this.DisplayForm_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DisplayForm_MouseClick);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DisplayForm_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DisplayForm_KeyDown);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.DisplayForm_MouseWheel);

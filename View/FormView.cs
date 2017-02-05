@@ -1,4 +1,5 @@
 ﻿using ApplicationDomain;
+using ApplicationDomain.Controller;
 using Space_Game.BasicModel;
 using Space_Game.BasicModel.DefaultBodies;
 using Space_Game.Geometry;
@@ -18,7 +19,7 @@ namespace Space_Game.View
     {
         private DisplayForm form;
 
-        public IController Controller { get; set; }
+        public IController<ILocation> Controller { get; set; }
 
         static FormView()
         {
@@ -26,7 +27,7 @@ namespace Space_Game.View
             Application.SetCompatibleTextRenderingDefault(false);
         }
 
-        public FormView(IController controller)
+        public FormView(IController<ILocation> controller)
         {
             Controller = controller;
 
@@ -49,6 +50,11 @@ namespace Space_Game.View
         public void Close()
         {
             Controller.Stop();
+        }
+
+        public void Select(ILocation location)
+        {
+            Controller.Selector.SelectAt(location);
         }
 
         private vector viewShift;

@@ -11,7 +11,7 @@ namespace Space_Game.Controller
     {
         public static void Main(string[] args)
         {
-            IController controller = new SpaceGameController();
+            var controller = new SpaceGameController();
 
             controller.Start();
         }

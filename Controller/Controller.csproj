@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocationSelector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SpaceGameController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,8 @@
 ﻿using ApplicationDomain;
+using ApplicationDomain.Controller;
 using Space_Game.BasicModel;
 using Space_Game.Carrier;
+using Space_Game.Geometry;
 using Space_Game.Simulation;
 using Space_Game.View;
 using System;
@@ -12,15 +14,19 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Controller
 {
-    class SpaceGameController : IController
+    class SpaceGameController : IController<ILocation>
     {
         IView<IBody> view;
         IModel model;
         IDrawModel<IBody> currentDrawModel;
 
+        public ISelector<ILocation> Selector { get; private set; }
+
         public void Start()
         {
             model = StartUp.SetupUniverse();
+
+            Selector = new LocationSelector(model);
 
             view = new FormView(this);
 

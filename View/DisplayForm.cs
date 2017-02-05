@@ -171,5 +171,10 @@ namespace Space_Game.View
         {
             handler.Close();
         }
+
+        private void DisplayForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            handler.Select(translator.ToFixedLocation(new Point(e.X, e.Y)));
+        }
     }
 }
