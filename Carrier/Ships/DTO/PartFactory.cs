@@ -12,7 +12,7 @@ namespace Space_Game.Carrier.Ships.DTO
         public List<Part> CreateParts(List<PartDTO> parts)
         {
             var availableParts = this.GetType().Assembly.GetTypes()
-                .Where(t => typeof(Part).IsAssignableFrom(t));
+                .Where(t => typeof(Part).IsAssignableFrom(t) && !t.IsAbstract);
 
             var newParts = new List<Part>();
             foreach(var part in parts)

@@ -51,7 +51,9 @@
     <Compile Include="Ships\DTO\PartFactory.cs" />
     <Compile Include="Ships\DTO\ShipDTO.cs" />
     <Compile Include="Ships\IShip.cs" />
+    <Compile Include="Ships\Parts\Implementations\Bridge.cs" />
     <Compile Include="Ships\Parts\Implementations\DummyPart.cs" />
+    <Compile Include="Ships\Parts\Implementations\FuelTank.cs" />
     <Compile Include="Ships\Parts\Implementations\NuclearEngine.cs" />
     <Compile Include="Ships\Parts\Part.cs" />
     <Compile Include="Ships\PoweredLocation.cs" />

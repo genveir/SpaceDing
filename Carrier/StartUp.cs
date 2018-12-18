@@ -23,8 +23,8 @@ namespace Space_Game.Carrier
             var system = new SystemGenerator().Generate();
 
             var carrierBase = new DummyPart(80000, 0);
-            var carrierEngine1 = new NuclearEngine(10000, 1.0d);
-            var carrierEngine2 = new NuclearEngine(10000, 1.0d);
+            var carrierEngine1 = new NuclearEngine(10000, 1000);
+            var carrierEngine2 = new NuclearEngine(10000, 1000);
             var carrierParts = new List<Part>() { carrierBase, carrierEngine1, carrierEngine2 };
 
             var carrier = new Ship("Carrier", new FixedLocation(100 * BILLION, 0), carrierParts);

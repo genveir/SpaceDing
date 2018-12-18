@@ -24,8 +24,8 @@ namespace Space_Game
         public void ShipWithBridgeAndFuelAndEngineHasAcceleration()
         {
             var dto = new ShipDTO("ship", (0, 0));
-            dto.AddPart("Bridge", 100);
-            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1.0"));
+            dto.AddPart("Bridge", 100, ("ControlEfficiency", "1000"));
+            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1000"), ("MassEfficiency", "1000"));
             dto.AddPart("FuelTank", 7500);
 
             var ship = dto.ToShip();
@@ -37,7 +37,7 @@ namespace Space_Game
         public void ShipWithNoControlHasNoAcceleration()
         {
             var dto = new ShipDTO("ship", (0, 0));
-            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1.0"));
+            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1000"), ("MassEfficiency", "1000"));
             dto.AddPart("FuelTank", 7500);
 
             var ship = dto.ToShip();
@@ -49,8 +49,8 @@ namespace Space_Game
         public void ShipWithoutFuelHasNoAcceleration()
         {
             var dto = new ShipDTO("ship", (0, 0));
-            dto.AddPart("Bridge", 100);
-            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1.0"));
+            dto.AddPart("Bridge", 100, ("ControlEfficiency", "1000"));
+            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1000"), ("MassEfficiency", "1000"));
 
             var ship = dto.ToShip();
 

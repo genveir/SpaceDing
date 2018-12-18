@@ -32,6 +32,7 @@ namespace Space_Game.Carrier.Ships
 
         public bool HasControl { get; set; }
 
+        public long Fuel { get; set; }
         public long Acceleration { get; set; }
 
         public long Mass { get; set; }
@@ -49,11 +50,18 @@ namespace Space_Game.Carrier.Ships
         {
             if (_parts.Count() == 0) throw new ShipWithoutPartsException();
 
-            Mass = _parts.Sum(part => part.Mass);
+            foreach (var part in _parts) part.SetSecondaryProperties();
 
-            var totalThrust = _parts.Sum(part => part.Thrust);
+            Mass = _parts.Sum(p => p.Mass);
 
-            Acceleration = totalThrust / Mass;
+            Fuel = _parts.Sum(p => p.FuelAvailable);
+            HasControl = _parts.Sum(p => p.ControlProvided) > _parts.Sum(p => p.ControlRequired);
+
+            if (Fuel == 0) Acceleration = 0;
+            else if (!HasControl) Acceleration = 0;
+            else Acceleration = _parts.Sum(p => p.Thrust) / Mass;
+
+            
         }
     }
 }
