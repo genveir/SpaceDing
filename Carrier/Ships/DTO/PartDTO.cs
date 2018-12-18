@@ -11,13 +11,13 @@ namespace Space_Game.Carrier.Ships.DTO
     {
         public PartDTO()
         {
-            Parameters = new Dictionary<string, string>();
+            Properties = new Dictionary<string, string>();
         }
 
         public string Name { get; set; }
 
         public int Mass { get; set; }
 
-        public Dictionary<string, string> Parameters { get; set; }
+        public Dictionary<string, string> Properties { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Carrier.Ships
 {
-    public class Part
+    public abstract class Part
     {
         public virtual long Mass { get; protected set; }
 

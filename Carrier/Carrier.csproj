@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ships\DTO\InvalidPartException.cs" />
     <Compile Include="Ships\DTO\PartDTO.cs" />
     <Compile Include="Ships\DTO\PartFactory.cs" />
     <Compile Include="Ships\DTO\ShipDTO.cs" />

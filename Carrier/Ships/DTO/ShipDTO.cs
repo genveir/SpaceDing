@@ -37,7 +37,7 @@ namespace Space_Game.Carrier.Ships.DTO
             {
                 Name = name,
                 Mass = mass,
-                Parameters = paramDict
+                Properties = paramDict
             });
         }
 
