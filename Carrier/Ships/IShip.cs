@@ -9,8 +9,8 @@ namespace Space_Game.Carrier.Ships
 {
     public interface IShip : IBody, IHasHeading
     {
-        List<IPart> Parts { get; set; }
+        List<Part> Parts { get; set; }
 
-        long MaximumSpeed { get; set; }
+        long Acceleration { get; set; }
     }
 }

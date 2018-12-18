@@ -9,15 +9,15 @@ namespace Space_Game.Carrier.Ships
 {
     public class Ship : IShip
     {
-        public Ship(String name, FixedLocation location, IEnumerable<IPart> parts)
+        public Ship(String name, ILocation location, IEnumerable<Part> parts)
         {
             Name = name;
             Location = location;
             Parts = parts.ToList();
         }
 
-        private List<IPart> _parts;
-        public List<IPart> Parts {
+        private List<Part> _parts;
+        public List<Part> Parts {
             get { return _parts; }
             set
             {
@@ -30,7 +30,9 @@ namespace Space_Game.Carrier.Ships
 
         public ILocation Location { get; set; }
 
-        public long MaximumSpeed { get; set; }
+        public bool HasControl { get; set; }
+
+        public long Acceleration { get; set; }
 
         public long Mass { get; set; }
 
@@ -45,14 +47,13 @@ namespace Space_Game.Carrier.Ships
 
         private void CalculatePropertiesFromParts()
         {
-            Mass = _parts.Select(part => part.Mass).Sum();
+            if (_parts.Count() == 0) throw new ShipWithoutPartsException();
 
-            var totalThrust =
-                _parts.Where(part => part is IEngine)
-                    .Select(engine => ((IEngine)engine).Thrust)
-                    .Sum();
+            Mass = _parts.Sum(part => part.Mass);
 
-            MaximumSpeed = totalThrust / Mass;
+            var totalThrust = _parts.Sum(part => part.Thrust);
+
+            Acceleration = totalThrust / Mass;
         }
     }
 }

@@ -6,19 +6,12 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Carrier.Ships
 {
-    class DummyPart : IPart
+    class DummyPart : Part
     {
-        private long _mass;
-        private long _powerDrain;
-
-        public DummyPart(long mass, long powerDrain)
+        public DummyPart(long mass, long powerDrain) : base()
         {
-            _mass = mass;
-            _powerDrain = powerDrain;
+            Mass = mass;
+            PowerDrain = powerDrain;
         }
-
-        public long Mass { get { return _mass; } }
-
-        public long PowerDrain { get { return _powerDrain; } }
     }
 }

@@ -11,6 +11,7 @@
     <AssemblyName>Carrier</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,10 +30,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,13 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ships\DTO\PartDTO.cs" />
+    <Compile Include="Ships\DTO\PartFactory.cs" />
+    <Compile Include="Ships\DTO\ShipDTO.cs" />
     <Compile Include="Ships\IShip.cs" />
-    <Compile Include="Ships\Parts\IEngine.cs" />
     <Compile Include="Ships\Parts\Implementations\DummyPart.cs" />
     <Compile Include="Ships\Parts\Implementations\NuclearEngine.cs" />
-    <Compile Include="Ships\Parts\IPart.cs" />
+    <Compile Include="Ships\Parts\Part.cs" />
     <Compile Include="Ships\PoweredLocation.cs" />
     <Compile Include="Ships\Ship.cs" />
+    <Compile Include="Ships\ShipWithoutPartsException.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemGenerator.cs" />
@@ -56,6 +65,9 @@
       <Project>{a2bbfeb4-710f-4136-82d0-e1f20d05ae76}</Project>
       <Name>Space Game</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
