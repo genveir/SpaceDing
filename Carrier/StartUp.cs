@@ -22,12 +22,7 @@ namespace Space_Game.Carrier
         {
             var system = new SystemGenerator().Generate();
 
-            var carrierBase = new DummyPart(80000, 0);
-            var carrierEngine1 = new NuclearEngine(10000, 1000);
-            var carrierEngine2 = new NuclearEngine(10000, 1000);
-            var carrierParts = new List<Part>() { carrierBase, carrierEngine1, carrierEngine2 };
-
-            var carrier = new Ship("Carrier", new FixedLocation(100 * BILLION, 0), carrierParts);
+            var carrier = SetupCarrier();
 
             system.AddMember(carrier);
 
@@ -35,6 +30,35 @@ namespace Space_Game.Carrier
             universe.Systems = new SolarSystem[] { system };
 
             return universe;
+        }
+
+        public static Universe SetupJustCarrier()
+        {
+            var universe = new Universe();
+            var system = new SolarSystem();
+            var star = new Star(system, "Star", new FixedLocation(0, 0), 2000 * MILLION);
+            var ast = new Asteroid("Asteroid", new OrbitLocation(star, new FixedLocation(500 * BILLION, 0), new radian(0.0000001)), 10000, star);
+
+            universe.Systems = new SolarSystem[] { system };
+            system.AddMember(ast);
+
+            var carrier = SetupCarrier();
+            carrier.Location = new OrbitLocation(ast, Direction.FromDegrees(0d), new Distance(10 * BILLION), new radian(0.00001));
+            system.AddMember(carrier);
+
+            return universe;
+        }
+
+        private static Ship SetupCarrier()
+        {
+            var carrierBase = new DummyPart(80000, 0);
+            var carrierEngine1 = new NuclearEngine(10000, 1000);
+            var carrierEngine2 = new NuclearEngine(10000, 1000);
+            var carrierParts = new List<Part>() { carrierBase, carrierEngine1, carrierEngine2 };
+
+            var carrier = new Ship("Carrier", new FixedLocation(100 * BILLION, 0), carrierParts);
+
+            return carrier;
         }
     }
 }

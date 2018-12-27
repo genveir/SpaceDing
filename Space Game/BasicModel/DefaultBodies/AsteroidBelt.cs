@@ -16,7 +16,7 @@ namespace Space_Game.BasicModel.DefaultBodies
         public Distance OuterRange { get; set; }
         public ILocation Center { get; set; }
 
-        internal AsteroidBelt(IUpdatableGroup<IBody> parent, ILocation center, string name, Distance innerRange, Distance outerRange)
+        public AsteroidBelt(IUpdatableGroup<IBody> parent, ILocation center, string name, Distance innerRange, Distance outerRange)
         {
             Parent = parent;
             Center = center;

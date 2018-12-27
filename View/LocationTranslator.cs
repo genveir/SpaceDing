@@ -20,7 +20,7 @@ namespace Space_Game.View
             _centerAsVector = new vector(center);
             _centerX = ClientRectangle.Width / 2;
             _centerY = ClientRectangle.Height / 2;
-            _distancePerPixel = distancePerPixel;
+            _distancePerPixel = Math.Max(1.0d, distancePerPixel);
         }
 
         public FixedLocation ToFixedLocation(Point point)

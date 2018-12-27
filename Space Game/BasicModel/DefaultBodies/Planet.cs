@@ -10,7 +10,7 @@ namespace Space_Game.BasicModel.DefaultBodies
 {
     public class Planet : Body
     {
-        internal Planet(IUpdatableGroup<IBody> parent, string name, ILocation location, long mass)
+        public Planet(IUpdatableGroup<IBody> parent, string name, ILocation location, long mass)
             :base(parent, name, location, mass)
         {
             _members = new ConcurrentBag<IBody>();

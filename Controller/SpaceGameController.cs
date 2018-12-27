@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Space_Game.Controller
 {
@@ -24,7 +25,21 @@ namespace Space_Game.Controller
 
         public void Start()
         {
-            model = StartUp.SetupUniverse();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            var menu = new StartForm(this);
+
+            Application.Run(menu);
+        }
+
+        public void Start(string scenario)
+        {
+            switch(scenario)
+            {
+                case "Carrier": model = StartUp.SetupJustCarrier(); break;
+                default: model = StartUp.SetupUniverse(); break;
+            }
 
             Selector = new LocationSelector(model);
 

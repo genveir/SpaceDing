@@ -21,12 +21,6 @@ namespace Space_Game.View
 
         public IController<ILocation> Controller { get; set; }
 
-        static FormView()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-        }
-
         public FormView(IController<ILocation> controller)
         {
             Controller = controller;

@@ -10,7 +10,7 @@ namespace ApplicationDomain.Controller
     {
         ISelector<Loc> Selector { get; }
 
-        void Start();
+        void Start(string scenario);
 
         void Update(long ticksToSimulate);
 
