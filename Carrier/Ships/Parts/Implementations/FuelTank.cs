@@ -8,11 +8,10 @@ namespace Space_Game.Carrier.Ships.Parts.Implementations
 {
     class FuelTank : Part
     {
-        public override string Name { get; protected set; }
-
-        public override void SetSecondaryProperties()
+        public FuelTank(long mass)
+            :base("FuelTank", mass, 0)
         {
-            FuelAvailable = Mass * 10000;
+            this.FuelAvailable = Mass * 10000;
         }
     }
 }

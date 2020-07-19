@@ -11,9 +11,19 @@ namespace Space_Game.Carrier.Ships
     {
         public Ship(String name, ILocation location, IEnumerable<Part> parts)
         {
+            _Construct(name, location, parts);
+        }
+
+        public Ship(string name, ILocation location, params Part[] parts) 
+        {
+            _Construct(name, location, parts);
+        }
+
+        private void _Construct(string name, ILocation location, IEnumerable<Part> parts)
+        {
             Name = name;
             Location = location;
-            Parts = parts.ToList();
+            Parts = parts?.ToList() ?? new List<Part>();
         }
 
         private List<Part> _parts;
@@ -48,9 +58,7 @@ namespace Space_Game.Carrier.Ships
 
         private void CalculatePropertiesFromParts()
         {
-            if (_parts.Count() == 0) throw new ShipWithoutPartsException();
-
-            foreach (var part in _parts) part.SetSecondaryProperties();
+            if (_parts == null || _parts.Count() == 0) throw new ShipWithoutPartsException();
 
             Mass = _parts.Sum(p => p.Mass);
 

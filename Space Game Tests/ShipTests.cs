@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using Space_Game.Carrier.Ships;
-using Space_Game.Carrier.Ships.DTO;
+using Space_Game.Carrier.Ships.Parts.Implementations;
 using Space_Game.Geometry;
 using System;
 using System.Collections.Generic;
@@ -13,34 +13,42 @@ namespace Space_Game
     public class ShipTests
     {        
         [Test]
-        public void CannotCreateShipWithoutParts()
+        public void CannotCreateShipWithNullParts()
         {
-            var dto = new ShipDTO("ship", (0, 0));
+            Assert.Throws<ShipWithoutPartsException>(() =>
+            {
+                new Ship("ship", new FixedLocation(0, 0), null);
+            });
+        }
 
-            Assert.Throws<ShipWithoutPartsException>(() => dto.ToShip());
+        [Test]
+        public void CannotCreateShipWithZeroParts()
+        {
+            Assert.Throws<ShipWithoutPartsException>(() =>
+            {
+                new Ship("ship", new FixedLocation(0, 0), new List<Part>());
+            });
         }
 
         [Test]
         public void ShipWithBridgeAndFuelAndEngineHasAcceleration()
         {
-            var dto = new ShipDTO("ship", (0, 0));
-            dto.AddPart("Bridge", 100, ("ControlEfficiency", "1000"));
-            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1000"), ("MassEfficiency", "1000"));
-            dto.AddPart("FuelTank", 7500);
+            var bridge = new Bridge("bridge", 100, 1000);
+            var engine = new NuclearEngine(1000, 1000);
+            var tank = new FuelTank(7500);
 
-            var ship = dto.ToShip();
-
+            var ship = new Ship("ship", new FixedLocation(0, 0), bridge, engine, tank);
+            
             Assert.AreNotEqual(0, ship.Acceleration);
         }
 
         [Test]
         public void ShipWithNoControlHasNoAcceleration()
         {
-            var dto = new ShipDTO("ship", (0, 0));
-            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1000"), ("MassEfficiency", "1000"));
-            dto.AddPart("FuelTank", 7500);
+            var engine = new NuclearEngine(1000, 1000);
+            var tank = new FuelTank(7500);
 
-            var ship = dto.ToShip();
+            var ship = new Ship("ship", new FixedLocation(0, 0), engine, tank);
 
             Assert.AreEqual(0, ship.Acceleration);
         }
@@ -48,11 +56,10 @@ namespace Space_Game
         [Test]
         public void ShipWithoutFuelHasNoAcceleration()
         {
-            var dto = new ShipDTO("ship", (0, 0));
-            dto.AddPart("Bridge", 100, ("ControlEfficiency", "1000"));
-            dto.AddPart("NuclearEngine", 1000, ("FuelEfficiency", "1000"), ("MassEfficiency", "1000"));
+            var bridge = new Bridge("bridge", 100, 1000);
+            var engine = new NuclearEngine(1000, 1000);
 
-            var ship = dto.ToShip();
+            var ship = new Ship("ship", new FixedLocation(0, 0), bridge, engine);
 
             Assert.AreEqual(0, ship.Acceleration);
         }
@@ -60,13 +67,10 @@ namespace Space_Game
         [Test]
         public void ShipWithoutEngineHasNoAcceleration()
         {
-            var dto = new ShipDTO("ship", (0, 0));
-            dto.AddPart("Bridge", 100);
-            dto.AddPart("FuelTank", 7500);
+            var bridge = new Bridge("bridge", 100, 1000);
+            var tank = new FuelTank(7500);
 
-            var ship = dto.ToShip();
-
-            Assert.AreEqual(0, ship.Acceleration);
+            var ship = new Ship("ship", new FixedLocation(0, 0), bridge, tank);
         }
     }
 }

@@ -52,6 +52,14 @@ namespace Space_Game.Controller
             view.Initialize(currentDrawModel);
 
             Update(0);
+
+            var time = 0;
+            while(true)
+            {
+                Update(time);
+
+                time += 3600;
+            }
         }
 
         public void Update(long ticks)

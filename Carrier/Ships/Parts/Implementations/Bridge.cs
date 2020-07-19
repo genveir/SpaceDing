@@ -8,15 +8,13 @@ namespace Space_Game.Carrier.Ships.Parts.Implementations
 {
     class Bridge : Part
     {
-        public Bridge() { }
+        public Bridge(string name, long mass, long controlEfficiency)
+            :base(name, mass, mass / 10)
+        {
+            this.ControlEfficiency = controlEfficiency;
+            this.ControlProvided = Mass * ControlEfficiency / 1000;
+        }
 
         public long ControlEfficiency { get; set; }
-
-        public override string Name { get; protected set; }
-
-        public override void SetSecondaryProperties()
-        {
-            ControlProvided = Mass * ControlEfficiency / 1000;
-        }
     }
 }

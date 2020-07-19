@@ -8,19 +8,8 @@ namespace Space_Game.Carrier.Ships
 {
     class DummyPart : Part
     {
-        public DummyPart() { }
-        public DummyPart(long mass, long powerDrain) : this()
+        public DummyPart(long mass, long powerDrain) : base("DummyPart", mass, powerDrain)
         {
-            Name = "DummyPart";
-            Mass = mass;
-            PowerDrain = powerDrain;
-        }
-
-        public override string Name { get; protected set; }
-
-        public override void SetSecondaryProperties()
-        {
-            
         }
     }
 }
