@@ -6,22 +6,77 @@ using System.Threading.Tasks;
 
 namespace Space_Game.Carrier.Efficiency
 {
-    public abstract class EfficiencyModifier
+    /// <summary>
+    /// How well does a part scale? 
+    /// Mass Efficiency 0 means a part performs equally well at all sizes 
+    /// Mass Efficiency 1000 means part performance halves whenever part size is double or half of the optimal size
+    /// </summary>
+    public class MassEfficiency
     {
-        public EfficiencyModifier(long efficiency)
+        private long efficiency;
+
+        public MassEfficiency(long efficiency)
         {
-            this.Efficiency = efficiency;
+            this.efficiency = efficiency;
         }
 
-        public long Efficiency { get; protected set; }
-
-        public long Apply(long input)
+        public long Apply(long mass, long optimalMass)
         {
-            return (input * Efficiency) / 1000;
+            long fractionalPromillage;
+            if (mass > optimalMass)
+            {
+                fractionalPromillage = (optimalMass * 1000) / mass;
+            }
+            else
+            {
+                fractionalPromillage = (mass * 1000) / optimalMass;
+            }
+
+            // 0 -> return 1000
+            // 1000 -> return fractionalPromillage
+
+            // ergo
+
+            // 0 -> return fractionalPromillage * 0 + 1000 * 1
+            // 1000 -> return fractionalPromillage * 1 + 1000 * 0
+
+            var fractionPart = fractionalPromillage * efficiency;
+            var basePart = 1000 * (1000 - efficiency);
+
+            var summed = fractionPart + basePart;
+            var divided = summed / 1000;
+
+            return divided;
         }
     }
 
-    public class MassEfficiency : EfficiencyModifier { public MassEfficiency(long efficiency) : base(efficiency) { } }
-    public class PowerEfficiency : EfficiencyModifier { public PowerEfficiency(long efficiency) : base(efficiency) { } }
-    public class FuelEfficiency : EfficiencyModifier { public FuelEfficiency(long efficiency) : base(efficiency) { } }
+    public class PowerEfficiency
+    {
+        private long efficiency;
+
+        public PowerEfficiency(long efficiency)
+        {
+            this.efficiency = efficiency;
+        }
+
+        public long Apply(long thrust)
+        {
+            return 1000;
+        }
+    }
+
+    public class FuelEfficiency
+    {
+        private long efficiency;
+
+        public FuelEfficiency(long efficiency)
+        {
+            this.efficiency = efficiency;
+        }
+
+        public long Apply(long thrust)
+        {
+            return 1000;
+        }
+    }
 }

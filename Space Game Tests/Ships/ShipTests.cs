@@ -72,5 +72,20 @@ namespace Space_Game
 
             var ship = new Ship("ship", new FixedLocation(0, 0), bridge, tank);
         }
+
+        [Test]
+        public void AccelerationIsThrustDividedByMass()
+        {
+            var bridge = new Bridge(100, 1000);
+            var engine = new NuclearEngine(1000, 1000);
+            var tank = new FuelTank(7500);
+
+            var ship = new Ship("ship", new FixedLocation(0, 0), bridge, engine, tank);
+
+            var mass = ship.Mass;
+            var thrust = ship.Parts.Sum(p => p.Thrust);
+
+            Assert.AreEqual(ship.Acceleration, thrust / mass);
+        }
     }
 }
