@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Space_Game
 {
-    class SensorTests
+    public class EngineTests
     {
     }
 }

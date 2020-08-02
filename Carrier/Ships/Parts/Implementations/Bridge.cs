@@ -8,8 +8,8 @@ namespace Space_Game.Carrier.Ships.Parts.Implementations
 {
     class Bridge : Part
     {
-        public Bridge(string name, long mass, long controlEfficiency)
-            :base(name, mass, mass / 10)
+        public Bridge(long mass, long controlEfficiency)
+            :base("Bridge", mass, mass / 10)
         {
             this.ControlEfficiency = controlEfficiency;
             this.ControlProvided = Mass * ControlEfficiency / 1000;

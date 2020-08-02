@@ -33,7 +33,7 @@ namespace Space_Game
         [Test]
         public void ShipWithBridgeAndFuelAndEngineHasAcceleration()
         {
-            var bridge = new Bridge("bridge", 100, 1000);
+            var bridge = new Bridge(100, 1000);
             var engine = new NuclearEngine(1000, 1000);
             var tank = new FuelTank(7500);
 
@@ -56,7 +56,7 @@ namespace Space_Game
         [Test]
         public void ShipWithoutFuelHasNoAcceleration()
         {
-            var bridge = new Bridge("bridge", 100, 1000);
+            var bridge = new Bridge(100, 1000);
             var engine = new NuclearEngine(1000, 1000);
 
             var ship = new Ship("ship", new FixedLocation(0, 0), bridge, engine);
@@ -67,7 +67,7 @@ namespace Space_Game
         [Test]
         public void ShipWithoutEngineHasNoAcceleration()
         {
-            var bridge = new Bridge("bridge", 100, 1000);
+            var bridge = new Bridge(100, 1000);
             var tank = new FuelTank(7500);
 
             var ship = new Ship("ship", new FixedLocation(0, 0), bridge, tank);

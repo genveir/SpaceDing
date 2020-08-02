@@ -1,6 +1,7 @@
 ﻿using Space_Game.BasicModel;
 using Space_Game.BasicModel.DefaultBodies;
 using Space_Game.Carrier.Ships;
+using Space_Game.Carrier.Ships.Parts.Implementations;
 using Space_Game.Geometry;
 using Space_Game.Simulation;
 using System;
@@ -51,10 +52,11 @@ namespace Space_Game.Carrier
 
         private static Ship SetupCarrier()
         {
-            var carrierBase = new DummyPart(80000, 0);
+            var carrierBridge = new Bridge(2000, 100);
+            var carrierFuelTank = new FuelTank(60000);
             var carrierEngine1 = new NuclearEngine(10000, 1000);
             var carrierEngine2 = new NuclearEngine(10000, 1000);
-            var carrierParts = new List<Part>() { carrierBase, carrierEngine1, carrierEngine2 };
+            var carrierParts = new List<Part>() { carrierBridge, carrierFuelTank, carrierEngine1, carrierEngine2 };
 
             var carrier = new Ship("Carrier", new FixedLocation(100 * BILLION, 0), carrierParts);
 

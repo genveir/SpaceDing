@@ -68,8 +68,6 @@ namespace Space_Game.Carrier.Ships
             if (Fuel == 0) Acceleration = 0;
             else if (!HasControl) Acceleration = 0;
             else Acceleration = _parts.Sum(p => p.Thrust) / Mass;
-
-            
         }
     }
 }

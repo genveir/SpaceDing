@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Space_Game.Carrier.Ships
+namespace Space_Game.Carrier.Ships.Parts.Implementations
 {
     class NuclearEngine : Part
     {

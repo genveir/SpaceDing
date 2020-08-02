@@ -52,7 +52,8 @@
     <Compile Include="LocationTranslatorTests.cs" />
     <Compile Include="OrbitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShipTests.cs" />
+    <Compile Include="Ships\EngineTests.cs" />
+    <Compile Include="Ships\ShipTests.cs" />
     <Compile Include="VectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
