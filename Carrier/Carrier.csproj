@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Efficiency\EfficiencyModifier.cs" />
     <Compile Include="Ships\IShip.cs" />
+    <Compile Include="Ships\Parts\Engine.cs" />
     <Compile Include="Ships\Parts\Implementations\Bridge.cs" />
     <Compile Include="Ships\Parts\Implementations\DummyPart.cs" />
     <Compile Include="Ships\Parts\Implementations\FuelTank.cs" />

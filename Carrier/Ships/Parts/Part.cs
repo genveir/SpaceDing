@@ -30,6 +30,8 @@ namespace Space_Game.Carrier.Ships
 
         public long FuelPerThrust { get; protected set; }
 
+        public long PowerPerThrust { get; protected set; }
+
         public long ControlProvided { get; protected set; }
 
         public long ControlRequired { get; protected set; }
